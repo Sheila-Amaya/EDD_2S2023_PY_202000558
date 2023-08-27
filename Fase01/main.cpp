@@ -9,6 +9,9 @@ using namespace std;
 
 bool iniciarSesion();
 void mostrarMenu();
+void mostrarSubMenu(); //menu empleados
+void mostrarSubMenu1(); //menu proyecto
+void mostrarSubMenu2(); //menu tarea
 
 int main()
 {
@@ -48,6 +51,64 @@ bool iniciarSesion()
 }
 
 
+//submenu de carga empleados
+void mostrarSubMenu()
+{
+    int subopcion;
+
+    do {
+        cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
+        cout << "\t============= Bienvenido PM-202000558 =============" << endl;
+        cout << "\t=============     CARGA EMPLEADOS     =============\n" << endl;
+        cout << "\t1. Carga Manual" << endl;
+        cout << "\t2. Carga Masiva" << endl;
+        cout << "\t3. Regresar al menu principal" << endl;
+        cout << "\n\tElija una opcion: ";
+        cin >> subopcion;
+
+        switch (subopcion) {
+            case 1:
+                cout << "\tRealizar suboopcion 1" << endl;
+                break;
+
+            case 2:
+                cout << "\tRealizar subopcion 2" << endl;
+                break;
+
+            case 3:
+                cout << "\tVolviendo al Menu Principal..." << endl;
+                mostrarMenu();
+                break;
+
+            default:
+                cout << "\topcion invalida. Intente de nuevo." << endl;
+                break;
+        }
+
+    } while (subopcion != 3);
+}
+
+
+//submenu crear proyecto
+void mostrarSubMenu1()
+{
+        cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
+        cout << "\t============= Bienvenido PM-202000558 =============" << endl;
+        cout << "\t=============     MENU DE PROYECTO     =============\n" << endl; //crear proyecto y asignar
+
+}
+
+//submenu crear tareas
+void mostrarSubMenu2()
+{
+
+        cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
+        cout << "\t============= Bienvenido PM-202000558 =============" << endl;
+        cout << "\t=============     MENU DE TAREAS     =============\n" << endl; //crear tarea y asignar
+
+}
+
+
 void mostrarMenu()
 {
     int opcion;
@@ -66,20 +127,25 @@ void mostrarMenu()
 
         switch (opcion) {
             case 1:
-                cout << "\tRealizar opcion 1" << endl;
+                mostrarSubMenu();
                 break;
 
             case 2:
-                cout << "\tRealizar opcion 2" << endl;
+                mostrarSubMenu1();
                 break;
 
             case 3:
-                cout << "\tRealizar opcion 3" << endl;
+                mostrarSubMenu2();
                 break;
 
             case 4:
                 cout << "\tRealizar opcion 4" << endl;
                 break;
+
+            case 5:
+                exit(0);
+                break;
+
 
             default:
                 cout << "\n\topcion invalida. Intente de nuevo." << endl;
