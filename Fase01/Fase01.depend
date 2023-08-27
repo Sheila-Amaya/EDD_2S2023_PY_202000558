@@ -17,3 +17,20 @@
 1693109016 c:\users\amaya\onedrive\documents\github\fase01\include\nodocd.h
 	<string>
 
+1693109040 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.cpp
+	"NodoCD.h"
+
+1693109016 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.h
+	<string>
+
+1693113379 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.cpp
+	"ListaCD.h"
+
+1693111745 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.h
+	"NodoCD.h"
+	<string>
+	<iostream>
+
+1693119264 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\main.cpp
+	<iostream>
+
