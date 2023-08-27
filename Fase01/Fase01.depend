@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1693032071 source:c:\users\amaya\onedrive\documents\github\fase01\include\listacd.cpp
+	"ListaCD.h"
+
+1693111745 c:\users\amaya\onedrive\documents\github\fase01\include\listacd.h
+	"NodoCD.h"
+	<string>
+	<iostream>
+
+1693111866 source:c:\users\amaya\onedrive\documents\github\fase01\main.cpp
+	<iostream>
+	"ListaCD.h"
+
+1693109040 source:c:\users\amaya\onedrive\documents\github\fase01\include\nodocd.cpp
+	"NodoCD.h"
+
+1693109016 c:\users\amaya\onedrive\documents\github\fase01\include\nodocd.h
+	<string>
+
