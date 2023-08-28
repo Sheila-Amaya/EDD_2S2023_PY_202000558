@@ -13,9 +13,22 @@ void mostrarMenu();
 void mostrarSubMenu(); //menu empleados
 void mostrarSubMenu1(); //menu proyecto
 void mostrarSubMenu2(); //menu tarea
+void cargaMasiva();
 
 int main()
 {
+    /*Matriz *matriz = new Matriz();
+    matriz->insertarElemento(0,0);
+    matriz->insertarElemento(1,1);
+    matriz->insertarElemento(2,2);
+    matriz->insertarElemento(3,3);
+
+    matriz->insertarElemento(4,0);
+    matriz->insertarElemento(5,1);
+    matriz->insertarElemento(5,0);
+    matriz->insertarElemento(5,3);
+    matriz->Graficar();*/
+
     if (iniciarSesion()) {
         cout << "\n\thas iniciado sesion correctamente... bienvenido\n" << endl;
         mostrarMenu();
@@ -23,6 +36,8 @@ int main()
 
     return 0;
 }
+
+
 
 //funcion para iniciar sesion
 bool iniciarSesion()
@@ -52,6 +67,21 @@ bool iniciarSesion()
 }
 
 
+void cargaMasiva()
+{
+
+    string nombreArchivo;
+    cout << "\n\tIngrese el nombre del archivo: ";
+    cin >> nombreArchivo;
+
+    string rutaRelativa = "../Archivo Entrada/" + nombreArchivo;
+
+    ListaCD *lista = new ListaCD();
+    lista->procesarArchivo(rutaRelativa);
+    lista->mostrar();
+}
+
+
 //submenu de carga empleados
 void mostrarSubMenu()
 {
@@ -69,11 +99,11 @@ void mostrarSubMenu()
 
         switch (subopcion) {
             case 1:
-                cout << "\tRealizar suboopcion 1" << endl;
+                cout << "\tRealizar subopcion 2" << endl;
                 break;
 
             case 2:
-                cout << "\tRealizar subopcion 2" << endl;
+                cargaMasiva();
                 break;
 
             case 3:

@@ -1,7 +1,14 @@
 #ifndef MATRIZ_H
 #define MATRIZ_H
 
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <string.h>
+
 #include "NodoMatriz.h"
+
+using namespace std;
 
 class Matriz //matriz dispersa
 {
@@ -9,6 +16,7 @@ class Matriz //matriz dispersa
         NodoMatriz *Raiz;
 
         void insertarElemento(int x, int y); //nombre proyecto, nombre empleado
+        void Graficar();
 
         Matriz();
         virtual ~Matriz();

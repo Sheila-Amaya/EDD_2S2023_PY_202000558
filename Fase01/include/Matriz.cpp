@@ -72,6 +72,7 @@ NodoMatriz* Matriz::insertarFila(NodoMatriz *nuevo, NodoMatriz *cabeza_fila)
         temp->Abajo = nuevo;
         nuevo->Anterior =temp;
     }
+    return nuevo;
 }
 
 
@@ -103,6 +104,7 @@ NodoMatriz* Matriz::insertarColumna(NodoMatriz *nuevo, NodoMatriz *cabeza_column
         temp->Siguiente = nuevo;
         nuevo->Anterior =temp;
     }
+    return nuevo;
 }
 
 NodoMatriz* Matriz::nueva_fila(int y)
@@ -159,4 +161,65 @@ void Matriz::insertarElemento(int x, int y)
 
 }
 
+void Matriz::Graficar()
+{
+    ofstream archivo;
+    std::string texto = "";
+	std::string nombre_archivo = "matriz.dot";
+	std::string nombre_imagen = "matriz.jpg";
+	NodoMatriz *aux1 = this->Raiz;
+	NodoMatriz *aux2 = this->Raiz;
+	NodoMatriz *aux3 = this->Raiz;
+	archivo.open(nombre_archivo, ios::out);
+	if ( aux1 != 0 ) {
+		archivo << "digraph MatrizCapa{ \n node[shape=box] \n rankdir=UD;\n";
+        /** Creacion de los nodos actuales */
+        /*while( aux1 != 0 ) {
+            archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << "[label=\"" << aux1->Proyecto << "\" ,rankdir=LR,group=" << (aux1->PosX+1) << "]; \n";
+            aux1 = aux1->Siguiente;
+        }
+        archivo << "}";*/
+        while( aux2 != 0 ) {
+            aux1 = aux2;
+            archivo << "{rank=same; \n";
+            while( aux1 != 0 ) {
+                archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << "[label=\"" << aux1->Coordenada << "\" ,group=" << (aux1->PosX+1) << "]; \n";
+                aux1 = aux1->Siguiente;
+            }
+            archivo << "} \n";
+            aux2 = aux2->Abajo;
+        }
+        /** Conexiones entre los nodos de la matriz */
+        aux2 = aux3;
+        while( aux2 != 0 ) {
+            aux1 = aux2;
+            while( aux1->Siguiente != 0 ) {
+                archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << " -> " << "nodo" << (aux1->Siguiente->PosX+1) << (aux1->Siguiente->PosY+1) << " [dir=both];\n";
+                aux1 = aux1->Siguiente;
+            }
+            aux2 = aux2->Abajo;
+        }
+        aux2 = aux3;
+        while( aux2 != 0 ) {
+            aux1 = aux2;
+            while( aux1->Abajo != 0 ) {
+                archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << " -> " << "nodo" << (aux1->Abajo->PosX+1) << (aux1->Abajo->PosY+1) << " [dir=both];\n";
+                aux1 = aux1->Abajo;
+            }
+            aux2 = aux2->Siguiente;
+        }
+        archivo << "} \n";
+	} else {
+		texto = "No hay elementos en la matriz";
+	}
 
+	archivo.close();
+    std::string codigo_cmd="dot -Tjpg ";
+    codigo_cmd+=nombre_archivo;
+    codigo_cmd+=" -o ";
+    codigo_cmd+=nombre_imagen;
+    char j[codigo_cmd.size()+1];
+    strcpy(j,codigo_cmd.c_str());
+    cout << j << endl;
+    system(j);
+}

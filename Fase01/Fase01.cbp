@@ -36,8 +36,12 @@
 		</Compiler>
 		<Unit filename="include/ListaCD.cpp" />
 		<Unit filename="include/ListaCD.h" />
+		<Unit filename="include/Matriz.cpp" />
+		<Unit filename="include/Matriz.h" />
 		<Unit filename="include/NodoCD.cpp" />
 		<Unit filename="include/NodoCD.h" />
+		<Unit filename="include/NodoMatriz.cpp" />
+		<Unit filename="include/NodoMatriz.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

@@ -16,7 +16,7 @@ class NodoCD //Nodo lista circular doblemente enlazada
 
 
 
-        NodoCD(std::string codigo, std::string nombre); //constructor
+        NodoCD(std::string nombre,std::string codigo); //constructor
         virtual ~NodoCD();
 
     protected:

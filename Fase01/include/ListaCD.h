@@ -4,6 +4,14 @@
 #include "NodoCD.h" //llamado al nodo de la lista
 #include <string>
 #include <iostream>
+
+//carga masiva
+#include <fstream>
+#include <string.h>
+#include <cstring>
+#include <sstream>
+#include <stdlib.h>
+
 using namespace std;
 
 class ListaCD //Lista circular doblemente enlazada
@@ -12,8 +20,9 @@ class ListaCD //Lista circular doblemente enlazada
         NodoCD *Primero;
         int Tamanio;
 
-        void Insertar(std::string codigo, std::string nombre);//funcion para agregar a la lista
+        void Insertar(std::string nombre, ::string codigo);//funcion para agregar a la lista
         void mostrar();
+        void procesarArchivo(std::string nombre_archivo);
 
 
         ListaCD();

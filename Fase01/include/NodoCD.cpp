@@ -1,10 +1,10 @@
 #include "NodoCD.h"
 
-NodoCD::NodoCD(std::string codigo, std::string nombre)
+NodoCD::NodoCD(std::string nombre,std::string codigo)
 {
     //ctor
-    this->Codigo = codigo;
     this->Nombre = nombre;
+    this->Codigo = codigo;
     this->Siguiente = 0;
     this->Anterior = 0;
 }
