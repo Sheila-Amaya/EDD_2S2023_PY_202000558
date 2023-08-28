@@ -31,6 +31,17 @@
 	<string>
 	<iostream>
 
-1693121603 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\main.cpp
+1693197565 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\main.cpp
 	<iostream>
+	"ListaCD.h"
+	"Matriz.h"
+
+1693197960 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.cpp
+	"NodoMatriz.h"
+
+1693198301 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.h
+	<string>
+
+1693190513 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\matriz.h
+	"NodoMatriz.h"
 

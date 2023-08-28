@@ -1,6 +1,7 @@
 #include <iostream>
 
-//#include "ListaCD.h" //importa la clase
+#include "ListaCD.h" //importa la clase
+#include "Matriz.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ void mostrarSubMenu2(); //menu tarea
 int main()
 {
     if (iniciarSesion()) {
-        cout << "\n\tsuccessfully logged in.. welcome\n" << endl;
+        cout << "\n\thas iniciado sesion correctamente... bienvenido\n" << endl;
         mostrarMenu();
     }
 
