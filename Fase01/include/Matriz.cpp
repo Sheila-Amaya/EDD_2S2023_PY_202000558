@@ -167,10 +167,17 @@ void Matriz::Graficar()
     std::string texto = "";
 	std::string nombre_archivo = "matriz.dot";
 	std::string nombre_imagen = "matriz.jpg";
+
+	std::string ruta_reportes = "../Reportes/"; // Carpeta para los reportes
+
 	NodoMatriz *aux1 = this->Raiz;
 	NodoMatriz *aux2 = this->Raiz;
 	NodoMatriz *aux3 = this->Raiz;
-	archivo.open(nombre_archivo, ios::out);
+
+    // Abre el archivo en la carpeta de reportes
+    archivo.open(ruta_reportes + nombre_archivo, ios::out);
+
+
 	if ( aux1 != 0 ) {
 		archivo << "digraph MatrizCapa{ \n node[shape=box] \n rankdir=UD;\n";
         /** Creacion de los nodos actuales */
@@ -215,9 +222,9 @@ void Matriz::Graficar()
 
 	archivo.close();
     std::string codigo_cmd="dot -Tjpg ";
-    codigo_cmd+=nombre_archivo;
+    codigo_cmd += ruta_reportes + nombre_archivo;
     codigo_cmd+=" -o ";
-    codigo_cmd+=nombre_imagen;
+    codigo_cmd += ruta_reportes + nombre_imagen;
     char j[codigo_cmd.size()+1];
     strcpy(j,codigo_cmd.c_str());
     cout << j << endl;

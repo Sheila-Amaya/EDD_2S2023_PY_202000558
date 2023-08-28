@@ -78,7 +78,7 @@ void cargaMasiva()
 
     ListaCD *lista = new ListaCD();
     lista->procesarArchivo(rutaRelativa);
-    lista->mostrar();
+    //lista->mostrar();
 }
 
 

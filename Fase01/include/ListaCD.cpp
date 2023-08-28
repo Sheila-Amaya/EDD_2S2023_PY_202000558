@@ -73,7 +73,6 @@ void ListaCD::Insertar(std::string nombre,std::string codigo)
 
 
 
-
 void ListaCD::mostrar()
 {
    NodoCD *aux = this->Primero;
