@@ -20,7 +20,7 @@ class ListaCD //Lista circular doblemente enlazada
         NodoCD *Primero;
         int Tamanio;
 
-        void Insertar(std::string nombre, ::string codigo);//funcion para agregar a la lista
+        void Insertar(std::string nombre, ::string password);//funcion para agregar a la lista
         void mostrar();
         void procesarArchivo(std::string nombre_archivo);
 

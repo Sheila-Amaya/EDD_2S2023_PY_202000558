@@ -17,7 +17,7 @@ void cargaMasiva();
 
 int main()
 {
-    Matriz *matriz = new Matriz();
+    /*Matriz *matriz = new Matriz();
     matriz->insertarElemento(0,0);
     matriz->insertarElemento(2,2);
     matriz->insertarElemento(1,1);
@@ -33,7 +33,7 @@ int main()
     matriz->insertarElemento(1,3);
 
     matriz->insertarElemento(1000,1000);
-    matriz->Graficar();
+    matriz->Graficar();*/
 
     if (iniciarSesion()) {
         cout << "\n\thas iniciado sesion correctamente... bienvenido\n" << endl;
@@ -84,7 +84,7 @@ void cargaMasiva()
 
     ListaCD *lista = new ListaCD();
     lista->procesarArchivo(rutaRelativa);
-    //lista->mostrar();
+    lista->mostrar();
 }
 
 

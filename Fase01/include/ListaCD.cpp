@@ -50,9 +50,9 @@ void ListaCD::procesarArchivo(std::string nombreArchivo)
     }
 }
 
-void ListaCD::Insertar(std::string nombre,std::string codigo)
+void ListaCD::Insertar(std::string nombre,std::string password)
 {
-    NodoCD *nuevo = new NodoCD(nombre,codigo);
+    NodoCD *nuevo = new NodoCD(nombre,password);
     if (this->Primero == 0)
     {
         nuevo->Anterior = nuevo;
@@ -80,7 +80,7 @@ void ListaCD::mostrar()
    while(this->Tamanio > contador)
    {
        cout << "Nombre:" << aux->Nombre << endl;
-       cout << "contrasenia:" <<aux->Codigo << endl;
+       cout << "contrasenia:" <<aux->Password << endl;
        aux = aux->Siguiente;
        contador++;
    }

@@ -8,7 +8,7 @@ class NodoCD //Nodo lista circular doblemente enlazada
 {
     public:
         std::string Nombre;
-        std::string Codigo;
+        std::string Password;
 
         //apuntadores lista
         NodoCD *Siguiente;
@@ -16,7 +16,7 @@ class NodoCD //Nodo lista circular doblemente enlazada
 
 
 
-        NodoCD(std::string nombre,std::string codigo); //constructor
+        NodoCD(std::string nombre,std::string password); //constructor
         virtual ~NodoCD();
 
     protected:
