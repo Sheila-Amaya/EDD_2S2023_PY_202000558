@@ -48,7 +48,7 @@ NodoMatriz* Matriz::insertarFila(NodoMatriz *nuevo, NodoMatriz *cabeza_fila)
 {
     NodoMatriz *temp = cabeza_fila;
     bool piv = false;
-    while(temp->Abajo)
+    while(true)
     {
         if(temp->PosY == nuevo->PosY)
         {
@@ -60,17 +60,22 @@ NodoMatriz* Matriz::insertarFila(NodoMatriz *nuevo, NodoMatriz *cabeza_fila)
             break;
 
         }
-        temp = temp->Abajo;
+        if(temp->Abajo)
+        {
+            temp = temp->Abajo;
+        }else{
+            break;
+        }
     }
     if(piv)//ordenar
     {
         nuevo->Abajo = temp;
-        temp->Arriba->Abajo = nuevo;
         nuevo->Arriba = temp->Arriba;
+        temp->Arriba->Abajo = nuevo;
         temp->Arriba = nuevo;
     }else{
+        nuevo->Arriba = temp;
         temp->Abajo = nuevo;
-        nuevo->Anterior =temp;
     }
     return nuevo;
 }
@@ -80,7 +85,7 @@ NodoMatriz* Matriz::insertarColumna(NodoMatriz *nuevo, NodoMatriz *cabeza_column
 {
     NodoMatriz *temp = cabeza_columna;
     bool piv = false;
-    while(temp->Siguiente)
+    while(true)
     {
         if(temp->PosX == nuevo->PosX)
         {
@@ -92,17 +97,22 @@ NodoMatriz* Matriz::insertarColumna(NodoMatriz *nuevo, NodoMatriz *cabeza_column
             break;
 
         }
-        temp = temp->Siguiente;
+        if(temp->Siguiente)
+        {
+            temp = temp->Siguiente;
+        }else{
+            break;
+        }
     }
     if(piv)//ordenar
     {
         nuevo->Siguiente = temp;
-        temp->Anterior->Siguiente = nuevo;
         nuevo->Anterior = temp->Anterior;
-        temp->Anterior = nuevo;
+        temp->Anterior->Siguiente = nuevo;
+        temp->Anterior=nuevo;
     }else{
-        temp->Siguiente = nuevo;
         nuevo->Anterior =temp;
+        temp->Siguiente = nuevo;
     }
     return nuevo;
 }
@@ -180,12 +190,7 @@ void Matriz::Graficar()
 
 	if ( aux1 != 0 ) {
 		archivo << "digraph MatrizCapa{ \n node[shape=box] \n rankdir=UD;\n";
-        /** Creacion de los nodos actuales */
-        /*while( aux1 != 0 ) {
-            archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << "[label=\"" << aux1->Proyecto << "\" ,rankdir=LR,group=" << (aux1->PosX+1) << "]; \n";
-            aux1 = aux1->Siguiente;
-        }
-        archivo << "}";*/
+
         while( aux2 != 0 ) {
             aux1 = aux2;
             archivo << "{rank=same; \n";
@@ -220,7 +225,7 @@ void Matriz::Graficar()
 		texto = "No hay elementos en la matriz";
 	}
 
-	archivo.close();
+        archivo.close();
     std::string codigo_cmd="dot -Tjpg ";
     codigo_cmd += ruta_reportes + nombre_archivo;
     codigo_cmd+=" -o ";

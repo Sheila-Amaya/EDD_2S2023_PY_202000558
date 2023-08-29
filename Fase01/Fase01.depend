@@ -17,16 +17,16 @@
 1693109016 c:\users\amaya\onedrive\documents\github\fase01\include\nodocd.h
 	<string>
 
-1693207233 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.cpp
+1693265785 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.cpp
 	"NodoCD.h"
 
-1693206718 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.h
+1693265785 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.h
 	<string>
 
-1693208242 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.cpp
+1693265785 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.cpp
 	"ListaCD.h"
 
-1693206739 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.h
+1693265785 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.h
 	"NodoCD.h"
 	<string>
 	<iostream>
@@ -36,24 +36,24 @@
 	<sstream>
 	<stdlib.h>
 
-1693208621 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\main.cpp
+1693266240 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\main.cpp
 	<iostream>
 	"ListaCD.h"
 	"Matriz.h"
 
-1693197960 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.cpp
+1693265785 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.cpp
 	"NodoMatriz.h"
 
-1693198301 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.h
+1693265785 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.h
 	<string>
 
-1693202660 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\matriz.h
+1693265785 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\matriz.h
 	<fstream>
 	<iostream>
 	<string>
 	<string.h>
 	"NodoMatriz.h"
 
-1693208600 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\matriz.cpp
+1693265785 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\matriz.cpp
 	"Matriz.h"
 

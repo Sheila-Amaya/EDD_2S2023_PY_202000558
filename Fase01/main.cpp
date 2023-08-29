@@ -17,17 +17,23 @@ void cargaMasiva();
 
 int main()
 {
-    /*Matriz *matriz = new Matriz();
+    Matriz *matriz = new Matriz();
     matriz->insertarElemento(0,0);
-    matriz->insertarElemento(1,1);
     matriz->insertarElemento(2,2);
+    matriz->insertarElemento(1,1);
     matriz->insertarElemento(3,3);
 
     matriz->insertarElemento(4,0);
     matriz->insertarElemento(5,1);
-    matriz->insertarElemento(5,0);
-    matriz->insertarElemento(5,3);
-    matriz->Graficar();*/
+
+    matriz->insertarElemento(5,4);
+    matriz->insertarElemento(4,5);
+
+    matriz->insertarElemento(1,2);
+    matriz->insertarElemento(1,3);
+
+    matriz->insertarElemento(1000,1000);
+    matriz->Graficar();
 
     if (iniciarSesion()) {
         cout << "\n\thas iniciado sesion correctamente... bienvenido\n" << endl;
