@@ -79,11 +79,15 @@ void ListaCD::mostrar()
    int contador = 0;
    while(this->Tamanio > contador)
    {
-       cout << "Nombre sistema:" << aux->EmpleadoSistema->Nombre << endl;
+       cout << "\n\tNombre :" << aux->EmpleadoSistema->Nombre << endl;
+       cout << "\tContrasenia :" << aux->EmpleadoSistema->Password << endl;
        /*cout << "Nombre:" << aux->Nombre << endl;
        cout << "contrasenia:" <<aux->Password << endl;*/
        aux = aux->Siguiente;
        contador++;
    }
 
+
 }
+
+

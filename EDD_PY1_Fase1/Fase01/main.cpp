@@ -1,12 +1,16 @@
 #include <iostream>
 
 #include "ListaCD.h" //importa la clase
+#include "Cola.h"
 #include "Matriz.h"
+
+#include <string>
 
 using namespace std;
 
 //
-
+ListaCD listaC; // lista circular doblemente enlazada
+Cola cola;
 
 bool iniciarSesion();
 void mostrarMenu();
@@ -17,23 +21,6 @@ void cargaMasiva();
 
 int main()
 {
-    /*Matriz *matriz = new Matriz();
-    matriz->insertarElemento(0,0);
-    matriz->insertarElemento(2,2);
-    matriz->insertarElemento(1,1);
-    matriz->insertarElemento(3,3);
-
-    matriz->insertarElemento(4,0);
-    matriz->insertarElemento(5,1);
-
-    matriz->insertarElemento(5,4);
-    matriz->insertarElemento(4,5);
-
-    matriz->insertarElemento(1,2);
-    matriz->insertarElemento(1,3);
-
-    matriz->insertarElemento(1000,1000);
-    matriz->Graficar();*/
 
     if (iniciarSesion()) {
         cout << "\n\thas iniciado sesion correctamente... bienvenido\n" << endl;
@@ -72,6 +59,21 @@ bool iniciarSesion()
     return false;
 }
 
+void cargaManual()
+{
+    string nombre,password;
+
+    cout << "\n\tIngrese los siguientes datos:" << endl;
+    cout << "\tNombre:" ;
+    cin >> nombre;
+    cout << "\tPassword:" ;
+    cin >> password;
+    //cout << "Puestos Disponibles" ;
+    //mostrar de la LD pusetos disponibles
+
+    listaC.Insertar(nombre,password);
+
+}
 
 void cargaMasiva()
 {
@@ -82,9 +84,8 @@ void cargaMasiva()
 
     string rutaRelativa = "../Archivo Entrada/" + nombreArchivo;
 
-    ListaCD *lista = new ListaCD();
-    lista->procesarArchivo(rutaRelativa);
-    lista->mostrar();
+    listaC.procesarArchivo(rutaRelativa);
+    listaC.mostrar();
 }
 
 
@@ -105,7 +106,7 @@ void mostrarSubMenu()
 
         switch (subopcion) {
             case 1:
-                cout << "\tRealizar subopcion 2" << endl;
+                cargaManual();
                 break;
 
             case 2:
@@ -132,6 +133,34 @@ void mostrarSubMenu1()
         cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
         cout << "\t============= Bienvenido PM-202000558 =============" << endl;
         cout << "\t=============     MENU DE PROYECTO     =============\n" << endl; //crear proyecto y asignar
+
+        string nombreP ,prioridad;
+
+        cout << "\tIngrese el nombre del proyecto: " ;
+        cin >> nombreP;
+        cout << "\tIngrese tipo de prioridad (A-C): " ;
+        cin >> prioridad;
+
+        // Validar que la prioridad ingresada sea A, B o C
+        while (prioridad != "A" && prioridad != "B" && prioridad != "C")
+        {
+            cout << "\tPrioridad no valida. Ingrese tipo de prioridad (A-C): ";
+            cin >> prioridad;
+        }
+        cola.Encolar(nombreP,prioridad);
+
+        NodoCola *ultimoProyecto = cola.getUltimoProyecto();
+        if (ultimoProyecto) { //si no es 0
+            cout << "\tCreado exitosamente: " << ultimoProyecto->Proyecto_C->Nombre << endl;
+        } else {
+            cout << "\tNingun proyecto en cola" << endl;
+        }
+
+
+        //cout << "PROYECTOS\n";
+        //cola.VerProyectos();
+
+
 
 }
 

@@ -1,0 +1,165 @@
+# depslib dependency file v1.0
+1693032071 source:c:\users\amaya\onedrive\documents\github\fase01\include\listacd.cpp
+	"ListaCD.h"
+
+1693111745 c:\users\amaya\onedrive\documents\github\fase01\include\listacd.h
+	"NodoCD.h"
+	<string>
+	<iostream>
+
+1693111866 source:c:\users\amaya\onedrive\documents\github\fase01\main.cpp
+	<iostream>
+	"ListaCD.h"
+
+1693109040 source:c:\users\amaya\onedrive\documents\github\fase01\include\nodocd.cpp
+	"NodoCD.h"
+
+1693109016 c:\users\amaya\onedrive\documents\github\fase01\include\nodocd.h
+	<string>
+
+1693319602 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.cpp
+	"NodoCD.h"
+
+1693334541 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocd.h
+	<string>
+	<Empleado.h>
+
+1693334481 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.cpp
+	"ListaCD.h"
+
+1693281251 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\listacd.h
+	"NodoCD.h"
+	<string>
+	<iostream>
+	<fstream>
+	<string.h>
+	<cstring>
+	<sstream>
+	<stdlib.h>
+
+1693333833 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\main.cpp
+	<iostream>
+	"ListaCD.h"
+	"Matriz.h"
+	<string>
+
+1693281251 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.cpp
+	"NodoMatriz.h"
+
+1693281251 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodomatriz.h
+	<string>
+
+1693281251 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\matriz.h
+	<fstream>
+	<iostream>
+	<string>
+	<string.h>
+	"NodoMatriz.h"
+
+1693281251 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\matriz.cpp
+	"Matriz.h"
+
+1693323656 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\empleado.cpp
+	"Empleado.h"
+
+1693323696 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\empleado.h
+	<string>
+
+1693322965 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nododoble.cpp
+	"NodoDoble.h"
+
+1693322965 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nododoble.h
+
+1693342872 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\proyecto.cpp
+	"Proyecto.h"
+
+1693344142 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\proyecto.h
+	<string>
+
+1693343969 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\cola.cpp
+	"Cola.h"
+
+1693344897 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\cola.h
+	<NodoCola.h>
+	<Proyecto.h>
+	<string>
+	<iostream>
+
+1693344570 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\fase01\include\nodocola.h
+	<Proyecto.h>
+
+1693323656 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\empleado.cpp
+	"Empleado.h"
+
+1693323696 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\empleado.h
+	<string>
+
+1693334481 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listacd.cpp
+	"ListaCD.h"
+
+1693281251 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listacd.h
+	"NodoCD.h"
+	<string>
+	<iostream>
+	<fstream>
+	<string.h>
+	<cstring>
+	<sstream>
+	<stdlib.h>
+
+1693334541 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocd.h
+	<string>
+	<Empleado.h>
+
+1693281251 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\matriz.cpp
+	"Matriz.h"
+
+1693281251 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\matriz.h
+	<fstream>
+	<iostream>
+	<string>
+	<string.h>
+	"NodoMatriz.h"
+
+1693281251 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodomatriz.h
+	<string>
+
+1693319602 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocd.cpp
+	"NodoCD.h"
+
+1693347462 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocola.cpp
+	"NodoCola.h"
+
+1693347497 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocola.h
+	<Proyecto.h>
+
+1693344142 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\proyecto.h
+	<string>
+
+1693322965 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nododoble.cpp
+	"NodoDoble.h"
+
+1693322965 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nododoble.h
+
+1693281251 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodomatriz.cpp
+	"NodoMatriz.h"
+
+1693342872 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\proyecto.cpp
+	"Proyecto.h"
+
+1693348789 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.cpp
+	"Cola.h"
+
+1693347569 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.h
+	<NodoCola.h>
+	<Proyecto.h>
+	<string>
+	<iostream>
+
+1693350467 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\main.cpp
+	<iostream>
+	"ListaCD.h"
+	"Cola.h"
+	"Matriz.h"
+	<string>
+

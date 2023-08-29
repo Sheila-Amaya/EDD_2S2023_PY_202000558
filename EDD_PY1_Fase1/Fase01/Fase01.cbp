@@ -34,14 +34,24 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Cola.cpp" />
+		<Unit filename="include/Cola.h" />
+		<Unit filename="include/Empleado.cpp" />
+		<Unit filename="include/Empleado.h" />
 		<Unit filename="include/ListaCD.cpp" />
 		<Unit filename="include/ListaCD.h" />
 		<Unit filename="include/Matriz.cpp" />
 		<Unit filename="include/Matriz.h" />
 		<Unit filename="include/NodoCD.cpp" />
 		<Unit filename="include/NodoCD.h" />
+		<Unit filename="include/NodoCola.cpp" />
+		<Unit filename="include/NodoCola.h" />
+		<Unit filename="include/NodoDoble.cpp" />
+		<Unit filename="include/NodoDoble.h" />
 		<Unit filename="include/NodoMatriz.cpp" />
 		<Unit filename="include/NodoMatriz.h" />
+		<Unit filename="include/Proyecto.cpp" />
+		<Unit filename="include/Proyecto.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
