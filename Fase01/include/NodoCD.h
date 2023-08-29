@@ -2,13 +2,15 @@
 #define NODOCD_H
 
 #include <string>
+#include <Empleado.h>
 using namespace std;
 
 class NodoCD //Nodo lista circular doblemente enlazada
 {
     public:
-        std::string Nombre;
-        std::string Password;
+        Empleado *EmpleadoSistema;
+        /*std::string Nombre;
+        std::string Password;*/
 
         //apuntadores lista
         NodoCD *Siguiente;
