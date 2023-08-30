@@ -1,0 +1,11 @@
+digraph cola {
+ rankdir=LR;
+ node[shape = record]; 
+nodo0[label="{PY-100 \n A}"]; 
+nodo1[label="{PY-101 \n C}"]; 
+nodo2[label="{PY-102 \n B}"]; 
+nodo0 -> nodo1
+nodo1 -> nodo2
+
+nodo2 -> null 
+}

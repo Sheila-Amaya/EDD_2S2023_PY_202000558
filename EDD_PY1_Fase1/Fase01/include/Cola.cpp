@@ -114,3 +114,56 @@ NodoCola* Cola::getUltimoProyecto()
 }
 
 
+std::string Cola::g_cola(NodoCola *&raiz, int tamanio) {
+    std::string cuerpo = "";
+    NodoCola *aux = raiz;
+    for (int i = 0; i < tamanio; i++) {
+        cuerpo += "nodo";
+        cuerpo += std::to_string(i);
+        cuerpo += "[label=\"{";
+        cuerpo +=  aux->Proyecto_C->Nombre + " \\n ";
+        cuerpo +=  aux->Prioridad;
+        cuerpo += "}\"]; \n";
+        aux = aux->Siguiente;
+    }
+    for (int i = 0; i < tamanio - 1; i++) {
+        cuerpo += "nodo";
+        cuerpo += std::to_string(i);
+        cuerpo += " -> ";
+        cuerpo += "nodo";
+        cuerpo += std::to_string(i + 1);
+        cuerpo += "\n";
+    }
+    cuerpo += "\nnodo";
+    cuerpo += std::to_string(tamanio - 1);
+    cuerpo += " -> null";
+    return cuerpo;
+}
+
+void Cola::graficar() {
+    ofstream archivo;
+    std::string ruta_reportes = "../Reportes/";
+    std::string nombre_archivo = "Cola.dot";
+    std::string nombre_imagen = "Cola.jpg";
+
+    archivo.open(ruta_reportes + nombre_archivo, ios::out);
+    if (archivo.fail()) {
+        cout << "Se produjo un error al generar el archivo " << nombre_archivo << endl;
+    } else {
+        if (this->Primero != nullptr) {
+            archivo << "digraph cola {\n rankdir=LR;\n node[shape = record]; \n"
+                    << g_cola(this->Primero, this->Tamanio) << " \n}";
+        } else {
+            archivo << "digraph cola {\n rankdir=LR;\n node[shape = record]; \n"
+                    << " nodonull1[label=\"null\"];\n nodonull2[label=\"null\"];\n}";
+        }
+
+        archivo.close();
+        try {
+            system(("dot -Tjpg " + ruta_reportes + nombre_archivo + " -o " + ruta_reportes + nombre_imagen).c_str());
+            cout << "Se genero la imagen " << nombre_imagen << " con exito" << endl;
+        } catch (exception e) {
+            cout << "Se produjo un error al generar la imagen " << nombre_imagen <<  endl;
+        }
+    }
+}

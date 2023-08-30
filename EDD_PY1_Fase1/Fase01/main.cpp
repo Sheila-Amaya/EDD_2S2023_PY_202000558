@@ -205,7 +205,8 @@ void mostrarMenu()
                 break;
 
             case 4:
-                cout << "\tRealizar opcion 4" << endl;
+                cout << "cola";
+                cola.graficar();
                 break;
 
             case 5:

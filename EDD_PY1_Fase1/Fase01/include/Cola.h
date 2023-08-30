@@ -5,7 +5,12 @@
 #include <Proyecto.h>
 
 #include <string>
+#include <cstdlib>
 #include <iostream>
+#include <fstream>
+
+using namespace std;
+
 
 using namespace std;
 
@@ -21,11 +26,13 @@ class Cola
         void Ordenar();
 
         NodoCola* getUltimoProyecto();
+        void graficar();
 
         Cola();
         virtual ~Cola();
 
     protected:
+        std::string g_cola(NodoCola *&raiz, int tamanio);
 
     private:
 };
