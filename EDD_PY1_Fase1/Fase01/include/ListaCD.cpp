@@ -100,4 +100,55 @@ void ListaCD::mostrar()
 
 }
 
+std::string ListaCD::g_circular(NodoCD *&raiz, int tamanio) {
+    std::string cuerpo = "";
+    NodoCD *aux = raiz;
 
+    for (int i = 0; i < tamanio; i++) {
+        cuerpo += "nodo";
+        cuerpo += std::to_string(i);
+        cuerpo += "[label=\"";
+        cuerpo += "Nombre: " + aux->EmpleadoSistema->Nombre + "\\n";
+        cuerpo += "Código: " + aux->EmpleadoSistema->Codigo;
+        cuerpo += "\"]; \n";
+        aux = aux->Siguiente;
+    }
+
+    for (int i = 0; i < tamanio; i++) {
+        cuerpo += "nodo";
+        cuerpo += std::to_string(i);
+        cuerpo += " -> ";
+        cuerpo += "nodo";
+        cuerpo += std::to_string((i + 1) % tamanio);
+        cuerpo += "\n";
+        cuerpo += "nodo";
+        cuerpo += std::to_string((i + 1) % tamanio);
+        cuerpo += " -> ";
+        cuerpo += "nodo";
+        cuerpo += std::to_string(i);
+        cuerpo += "\n";
+    }
+
+    return cuerpo;
+}
+
+void ListaCD::graficar() {
+    ofstream archivo;
+    string ruta_reportes = "../Reportes/";
+    string nombre_archivo_dot = "Lista_circular_doble.dot"; // Change the filename
+    string nombre_imagen = "Lista_circular_doble.jpg"; // Change the filename
+
+    archivo.open(ruta_reportes + nombre_archivo_dot, ios::out);
+    if (archivo.fail()) {
+        cout << "Se produjo un error al generar el archivo DOT" << endl;
+    } else {
+        archivo << "digraph lista{\n rankdir=LR;\n node[shape = record]; \n" << g_circular(this->Primero, this->Tamanio) << " \n}";
+        archivo.close();
+    }
+    try {
+        system(("dot -Tjpg -Gcharset=latin1 " + ruta_reportes + nombre_archivo_dot + " -o " + ruta_reportes + nombre_imagen).c_str());
+        cout << "\n\tSe genero el reporte con exito\n" << endl;
+    } catch (exception e) {
+        cout << "Se produjo un error al generar la imagen '" << nombre_imagen << "'." << endl;
+    }
+}

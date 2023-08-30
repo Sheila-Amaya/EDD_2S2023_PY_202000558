@@ -9,17 +9,21 @@ using namespace std;
 class NodoListaDoble
 {
     public:
+
+        NodoListaDoble *Siguiente;
+        NodoListaDoble *Anterior;
+
         std::string Codigo;
         std::string Nombre_Tarea;
         std::string Codigo_Encargado;
-        NodoListaDoble *Siguiente;
-        NodoListaDoble *Anterior;
+
         NodoListaDoble(std::string codigo, std::string nombre_tarea, std::string codigo_encargado);
         virtual ~NodoListaDoble();
 
     protected:
 
     private:
+        std::string g_circular(NodoListaDoble *&raiz, int tamanio);
 };
 
 

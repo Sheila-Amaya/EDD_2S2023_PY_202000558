@@ -60,14 +60,121 @@ void ListaCD::Insertar(std::string nombre,std::string password)
     Se utilizó para almacenamiento y manejo de tareas.
 
 ```c++
-    cout <<"hola>>
+    ListaDoble::ListaDoble()
+    {
+        //ctor
+        this->Primero = 0;
+        this->Tamanio = 0;
+    }
+
+    ListaDoble::~ListaDoble()
+    {
+        //dtor
+    }
+
+    void ListaDoble::Insertar(std::string codigo, std::string nombre_tarea, std::string codigo_encargado)
+    {
+        NodoListaDoble *nuevo = new NodoListaDoble(codigo, nombre_tarea, codigo_encargado);
+        if(this->Primero == 0)
+        {
+            this->Primero = nuevo;
+            this->Tamanio++;
+        }else
+        {
+            NodoListaDoble *aux = this->Primero;
+            while(aux->Siguiente)
+            {
+                aux = aux->Siguiente;
+            }
+            nuevo->Anterior = aux;
+            aux->Siguiente = nuevo;
+            this->Tamanio++;
+        }
+    }
 ```
 
 3. Matriz dispersa
     Se utilizó para se utilizo para almacenar proyectos y empleados.
 
 ```c++
-    cout <<"hola>>
+    Matriz::~Matriz()
+    {
+        //dtor
+    }
+
+Matriz::Matriz()
+    {
+        //ctor
+        this->Raiz = new NodoMatriz(new Proyecto("RAIZ",""),new Empleado("",""),-1,-1);
+        this->CoordenadaX = 0;
+        this->CoordenadaY = 0;
+    }
+
+    NodoMatriz* Matriz::buscarFila(int y)
+{
+    NodoMatriz *aux = this->Raiz;
+    while(aux != 0)
+    {
+        if(aux->PosY == y)
+        {
+            return aux;
+        }
+        aux = aux->Abajo;
+    }
+    return 0;
+}
+
+NodoMatriz* Matriz::buscarColumna(int x)
+{
+    NodoMatriz *aux = this->Raiz;
+    while(aux != 0)
+    {
+        if(aux->PosX == x)
+        {
+            return aux;
+        }
+        aux = aux->Siguiente;
+    }
+    return 0;
+}
+
+NodoMatriz* Matriz::insertarColumna(NodoMatriz *nuevo, NodoMatriz *cabeza_columna)
+{
+    NodoMatriz *temp = cabeza_columna;
+    bool piv = false;
+    while(true)
+    {
+        if(temp->PosX==nuevo->PosX){
+            temp->PosY = nuevo->PosY;
+            temp->Encargado_c = nuevo->Encargado_c;
+            temp->Proyecto_c = nuevo->Proyecto_c;
+            return temp;
+        }else if(temp->PosX > nuevo->PosX){
+            piv=true;
+            break;
+        }
+        if(temp->Siguiente){
+            temp = temp->Siguiente;
+        }else{
+            break;
+        }
+    }
+    if(piv)
+    {
+        nuevo->Siguiente = temp;
+        temp->Anterior->Siguiente = nuevo;
+        nuevo->Anterior=temp->Anterior;
+        temp->Anterior=nuevo;
+    }
+    else
+    {
+        temp->Siguiente=nuevo;
+        nuevo->Anterior=temp;
+    }
+    return nuevo;
+}
+
+
 ```
 
 4. Cola de Prioridad

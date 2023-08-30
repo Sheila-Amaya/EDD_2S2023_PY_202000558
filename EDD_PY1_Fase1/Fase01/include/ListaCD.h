@@ -12,6 +12,10 @@
 #include <sstream>
 #include <stdlib.h>
 
+
+
+using namespace std;
+
 using namespace std;
 
 class ListaCD //Lista circular doblemente enlazada
@@ -30,6 +34,7 @@ class ListaCD //Lista circular doblemente enlazada
         virtual ~ListaCD();
 
     protected:
+        std::string g_circular(NodoCD *&raiz, int tamanio);
 
     private:
 };

@@ -17,12 +17,14 @@ ListaDoble doble;// lista doblemente enlazada
 bool iniciarSesion();
 void mostrarMenu();
 void mostrarSubMenu(); //menu empleados
-void mostrarSubMenu1(); //menu proyecto
-void mostrarSubMenu2(); //menu tarea
+void CrearP(); //menu proyecto
+void CrearT(); //menu tarea
 void cargaMasiva();
+void cargaManual();
 
 int main()
 {
+
 
     if (iniciarSesion()) {
         cout << "\n\thas iniciado sesion correctamente... bienvenido\n" << endl;
@@ -86,7 +88,6 @@ void cargaMasiva()
 
     listaC.procesarArchivo(rutaRelativa);
     cout << "\tCarga realizada con exito...\n ";
-    //listaC.mostrar();
 }
 
 
@@ -137,9 +138,9 @@ void CrearP()
 
         string nombreP ,prioridad;
 
-        cout << "\tNombre del proyecto: " ;
+        cout << "\tIngrese el nombre del proyecto: " ;
         cin >> nombreP;
-        cout << "\tTipo de prioridad (A-C): " ;
+        cout << "\tIngrese tipo de prioridad (A-C): " ;
         cin >> prioridad;
 
         // Validar que la prioridad ingresada sea A, B o C
@@ -148,17 +149,15 @@ void CrearP()
             cout << "\tPrioridad no valida. Ingrese tipo de prioridad (A-C): ";
             cin >> prioridad;
         }
-
+        cola.Encolar(nombreP,prioridad);
 
         NodoCola *ultimoProyecto = cola.getUltimoProyecto();
         if (ultimoProyecto) { //si no es 0
             cout << "\tCreado exitosamente: " << ultimoProyecto->Proyecto_C->Nombre << endl;
-            cola.Encolar(nombreP,ultimoProyecto->Proyecto_C->Nombre,prioridad);
         }
 
-
         //cout << "PROYECTOS\n";
-        cola.VerProyectos();
+        //cola.VerProyectos();
 
 
 }
@@ -172,10 +171,11 @@ void asignarProyecto()
 //submenu crear tareas
 void CrearT()
 {
-
         cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
         cout << "\t============= Bienvenido PM-202000558 =============" << endl;
         cout << "\t=============     MENU DE TAREAS     =============\n" << endl;
+
+
 
 }
 
@@ -198,7 +198,10 @@ void reportes()
         do {
             cout << "\t1. Reporte de la matriz dispersa" << endl;
             cout << "\t2. Reporte de la cola" << endl;
-            cout << "\t3. Regresar" << endl;
+            cout << "\t3. Reporte de la circular doblemente " << endl;
+            cout << "\t4. Reporte de la doblemente enlazada" << endl;
+            cout << "\t5. Reporte JSON" << endl;
+            cout << "\t6. Regresar" << endl;
             cout << "";
             cout << "\n\tElija una opcion: ";
             cin >> opcion;
@@ -211,15 +214,28 @@ void reportes()
             case 2:
                 cola.Ordenar();
                 cola.graficar();
+                reportes();
                 break;
 
             case 3:
-                mostrarSubMenu();
+                listaC.graficar();
+                break;
+
+            case 4:
+                doble.graficar();
+                break;
+
+            case 5:
+                cout << "nada aun";
+                break;
+
+            case 6:
+                mostrarMenu();
                 break;
 
         }
 
-    } while (opcion != 3);
+    } while (opcion != 6);
 }
 
 void mostrarMenu()
@@ -232,7 +248,6 @@ void mostrarMenu()
         cout << "\t1. Cargar Empleados" << endl;
         cout << "\t2. Crear Proyecto" << endl;
         cout << "\t3. Asignar Proyecto" << endl;
-
         cout << "\t4. Crear Tareas" << endl;
         cout << "\t5. Asignar Tareas" << endl;
         cout << "\t6. Reportes" << endl;
