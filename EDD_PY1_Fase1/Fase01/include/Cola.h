@@ -20,7 +20,7 @@ class Cola
 
         NodoCola *Primero;
         int Tamanio;
-        void Encolar(std::string Nombre, std::string TipoPrioridad);
+        void Encolar(std::string nombreP,std::string Nombre, std::string TipoPrioridad);
         void Descolar();
         void VerProyectos();
         void Ordenar();

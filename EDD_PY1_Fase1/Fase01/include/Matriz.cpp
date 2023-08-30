@@ -3,8 +3,9 @@
 Matriz::Matriz()
 {
     //ctor
-    this->Raiz = new NodoMatriz("Raiz",-1,-1);
-
+    this->Raiz = new NodoMatriz(new Proyecto("RAIZ",""),new Empleado("",""),-1,-1);
+    this->CoordenadaX = 0;
+    this->CoordenadaY = 0;
 }
 
 Matriz::~Matriz()
@@ -12,13 +13,12 @@ Matriz::~Matriz()
     //dtor
 }
 
-//funciones
-NodoMatriz* Matriz::buscarFila(int y)
+NodoMatriz* Matriz::buscarF(int y)
 {
     NodoMatriz *aux = this->Raiz;
     while(aux != 0)
     {
-        if (aux->PosY == y)
+        if(aux->PosY == y)
         {
             return aux;
         }
@@ -27,148 +27,188 @@ NodoMatriz* Matriz::buscarFila(int y)
     return 0;
 }
 
-
-NodoMatriz* Matriz::buscarColumna(int x)
+NodoMatriz* Matriz::buscarC(int x)
 {
     NodoMatriz *aux = this->Raiz;
     while(aux != 0)
     {
-        if (aux->PosX == x)
+        if(aux->PosX == x)
         {
             return aux;
         }
         aux = aux->Siguiente;
     }
     return 0;
-
 }
 
-
-NodoMatriz* Matriz::insertarFila(NodoMatriz *nuevo, NodoMatriz *cabeza_fila)
-{
-    NodoMatriz *temp = cabeza_fila;
-    bool piv = false;
-    while(true)
-    {
-        if(temp->PosY == nuevo->PosY)
-        {
-            temp->PosX = nuevo->PosX;
-            temp->Coordenada = nuevo->Coordenada;
-            return temp;
-        }else if(temp->PosY > nuevo->PosY){
-            piv = true;
-            break;
-
-        }
-        if(temp->Abajo)
-        {
-            temp = temp->Abajo;
-        }else{
-            break;
-        }
-    }
-    if(piv)//ordenar
-    {
-        nuevo->Abajo = temp;
-        nuevo->Arriba = temp->Arriba;
-        temp->Arriba->Abajo = nuevo;
-        temp->Arriba = nuevo;
-    }else{
-        nuevo->Arriba = temp;
-        temp->Abajo = nuevo;
-    }
-    return nuevo;
-}
-
-
-NodoMatriz* Matriz::insertarColumna(NodoMatriz *nuevo, NodoMatriz *cabeza_columna)
+NodoMatriz* Matriz::insertar_columna(NodoMatriz *nuevo, NodoMatriz *cabeza_columna)
 {
     NodoMatriz *temp = cabeza_columna;
     bool piv = false;
     while(true)
     {
-        if(temp->PosX == nuevo->PosX)
-        {
+        if(temp->PosX==nuevo->PosX){
             temp->PosY = nuevo->PosY;
-            temp->Coordenada = nuevo->Coordenada;
+            temp->Encargado_c = nuevo->Encargado_c;
+            temp->Proyecto_c = nuevo->Proyecto_c;
             return temp;
         }else if(temp->PosX > nuevo->PosX){
-            piv = true;
+            piv=true;
             break;
-
         }
-        if(temp->Siguiente)
-        {
+        if(temp->Siguiente){
             temp = temp->Siguiente;
         }else{
             break;
         }
     }
-    if(piv)//ordenar
+    if(piv)
     {
         nuevo->Siguiente = temp;
-        nuevo->Anterior = temp->Anterior;
         temp->Anterior->Siguiente = nuevo;
+        nuevo->Anterior=temp->Anterior;
         temp->Anterior=nuevo;
-    }else{
-        nuevo->Anterior =temp;
-        temp->Siguiente = nuevo;
+    }
+    else
+    {
+        temp->Siguiente=nuevo;
+        nuevo->Anterior=temp;
     }
     return nuevo;
 }
 
-NodoMatriz* Matriz::nueva_fila(int y)
+NodoMatriz* Matriz::insertar_fila(NodoMatriz *nuevo, NodoMatriz *cabeza_fila)
 {
-    std::string fil = "F";
-    fil += std::to_string(y);
-    NodoMatriz *fila = this->insertarFila(new NodoMatriz(fil,-1,y),this->Raiz);
-    return fila;
+    NodoMatriz *temp = cabeza_fila;
+    bool piv = false;
+    while(true)
+    {
+        if(temp->PosY==nuevo->PosY){
+            temp->PosX = nuevo->PosX;
+            temp->Encargado_c = nuevo->Encargado_c;
+            temp->Proyecto_c = nuevo->Proyecto_c;
+            return temp;
+        }else if(temp->PosY > nuevo->PosY){
+            piv=true;
+            break;
+        }
+        if(temp->Abajo){
+            temp = temp->Abajo;
+        }else{
+            break;
+        }
+    }
+    if(piv)
+    {
+        nuevo->Abajo = temp;
+        temp->Arriba->Abajo = nuevo;
+        nuevo->Arriba = temp->Arriba;
+        temp->Arriba = nuevo;
+    }
+    else
+    {
+        temp->Abajo = nuevo;
+        nuevo->Arriba = temp;
+    }
+    return nuevo;
 }
 
-NodoMatriz* Matriz::nueva_Columna(int x)
+/** NUEVAS FUNCIONES */
+NodoMatriz* Matriz::nueva_columna_1(int x, Proyecto *proyecto)
 {
-    std::string col = "C";
-    col += std::to_string(x);
-    NodoMatriz *columna = this->insertarColumna(new NodoMatriz(col,x,-1),this->Raiz);
+    NodoMatriz *columna = this->insertar_columna(new NodoMatriz(proyecto, 0, x, -1), this->Raiz);
     return columna;
 }
 
-
-void Matriz::insertarElemento(int x, int y)
+void Matriz::insertar_proyecto(Cola *cola)
 {
-    std::string coordenada = std::to_string(x);
-    coordenada += ",";
-    coordenada += std::to_string(y);
-    NodoMatriz *nuevo = new NodoMatriz(coordenada,x,y);
-    NodoMatriz *nodo_columna = this->buscarColumna(x);
-    NodoMatriz *nodo_fila =this->buscarFila(y);
+    NodoMatriz *nodo_Columna = this->nueva_columna_1(this->CoordenadaX, cola->Primero->Proyecto_C);
+    this->CoordenadaX++;
+}
 
+NodoMatriz* Matriz::nueva_fila_1(int y, Empleado *encargado)
+{
+    NodoMatriz *fila = this->insertar_fila(new NodoMatriz(0, encargado, -1, y), this->Raiz);
+    return fila;
+}
 
-    if(nodo_columna == 0 && nodo_fila == 0) //no exite fila ni columna
+void Matriz::insertar_empleado(ListaCD *lista)
+{
+    //
+    NodoCD *aux = lista->Primero;
+    int contador = 0;
+    while(lista->Tamanio > contador)
     {
-        nodo_columna = this->nueva_Columna(x);
-        nodo_fila = this->nueva_fila(y);
-        nuevo = this->insertarFila(nuevo,nodo_columna);
-        nuevo = this->insertarColumna(nuevo,nodo_fila);
-
-    }else if(nodo_columna == 0 && nodo_fila != 0) //columna no existe pero fila si
-    {
-        nodo_columna = this->nueva_Columna(x);
-        nuevo = this->insertarFila(nuevo,nodo_columna);
-        nuevo = this->insertarColumna(nuevo,nodo_fila);
-
-    }else if(nodo_columna != 0 && nodo_fila == 0) //columna si existe pero fila no
-    {
-        nodo_fila = this->nueva_fila(y);
-        nuevo = this->insertarFila(nuevo,nodo_columna);
-        nuevo = this->insertarColumna(nuevo,nodo_fila);
-
-    }else if(nodo_columna != 0 && nodo_fila != 0) //si existe columna y fila
-    {
-        nuevo = this->insertarFila(nuevo,nodo_columna);
-        nuevo = this->insertarColumna(nuevo,nodo_fila);
+        this->nueva_fila_1(this->CoordenadaY, aux->EmpleadoSistema);
+        aux = aux->Siguiente;
+        contador++;
+        this->CoordenadaY++;
     }
+}
 
+void Matriz::asignarProyecto(std::string nombre_empleado, std::string codigo_proyecto)
+{
+    NodoMatriz *nodo_Columna =  this->buscarC_1(codigo_proyecto);
+    NodoMatriz *nodo_Fila = this->buscarF_1(nombre_empleado);
+
+    NodoMatriz *nuevo = new NodoMatriz(nodo_Columna->Proyecto_c, nodo_Fila->Encargado_c, nodo_Columna->PosX, nodo_Fila->PosY);
+
+    if(nodo_Columna != 0 && nodo_Fila !=0 ){
+        nuevo=this->insertar_columna(nuevo, nodo_Fila);
+        nuevo=this->insertar_fila(nuevo, nodo_Columna);
+        return;
+    }
+    else{
+        cout << "Se podrujo un error al insertar el nuevo nodo" << endl;
+    }
+}
+
+NodoMatriz* Matriz::buscarF_1(std::string nombre)
+{
+    NodoMatriz *aux = this->Raiz;
+    while(aux != 0)
+    {
+        if(aux->Encargado_c->Nombre.compare(nombre) == 0)
+        {
+            return aux;
+        }
+        aux = aux->Abajo;
+    }
+    return 0;
+}
+
+NodoMatriz* Matriz::buscarC_1(std::string codigo)
+{
+    NodoMatriz *aux = this->Raiz;
+    while(aux != 0)
+    {
+        if(aux->Proyecto_c->Codigo.compare(codigo) == 0)
+        {
+            return aux;
+        }
+        aux = aux->Siguiente;
+    }
+    return 0;
+}
+
+void Matriz::BuscarProyecto(std::string codigo, std::string nombre_tarea)
+{
+    NodoMatriz *nodo_Columna =  this->buscarC_1(codigo);
+    nodo_Columna->Tareas->Insertar(codigo, nombre_tarea, "");
+}
+
+void Matriz::BuscarEmpleado(std::string codigo, std::string nombre_tarea, std::string nombre_empleado)
+{
+    NodoMatriz *nodo_Columna =  this->buscarC_1(codigo);
+    NodoMatriz *nodo_Fila = this->buscarF_1(nombre_empleado);
+    if(nodo_Fila != 0)
+    {
+        nodo_Columna->Tareas->Asignar(nodo_Columna->Proyecto_c->Codigo, nombre_tarea, nodo_Fila->Encargado_c->Codigo);
+    }
+    else
+    {
+        cout << "No hay empleado con ese nombre" << endl;
+    }
 }
 
 void Matriz::Graficar()
@@ -190,12 +230,24 @@ void Matriz::Graficar()
 
 	if ( aux1 != 0 ) {
 		archivo << "digraph MatrizCapa{ \n node[shape=box] \n rankdir=UD;\n";
+        /** Creacion de los nodos actuales */
 
         while( aux2 != 0 ) {
             aux1 = aux2;
             archivo << "{rank=same; \n";
             while( aux1 != 0 ) {
-                archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << "[label=\"" << aux1->Coordenada << "\" ,group=" << (aux1->PosX+1) << "]; \n";
+                if(aux1->Proyecto_c)
+                {
+                    if(aux1->Encargado_c)
+                    {
+                        archivo << "nodo" << aux1 << "[label=\"" << aux1->Proyecto_c->Codigo << "\\n" << aux1->Encargado_c->Codigo << "\" ,group=" << (aux1->PosX+1) << "]; \n";
+                    }else{
+                        archivo << "nodo" << aux1 << "[label=\"" << aux1->Proyecto_c->Codigo << "\" ,group=" << (aux1->PosX+1) << "]; \n";
+                    }
+                }else if(aux1->Encargado_c)
+                {
+                    archivo << "nodo" << aux1 << "[label=\"" << aux1->Encargado_c->Nombre << "\" ,group=" << (aux1->PosX+1) << "]; \n";
+                }
                 aux1 = aux1->Siguiente;
             }
             archivo << "} \n";
@@ -206,7 +258,7 @@ void Matriz::Graficar()
         while( aux2 != 0 ) {
             aux1 = aux2;
             while( aux1->Siguiente != 0 ) {
-                archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << " -> " << "nodo" << (aux1->Siguiente->PosX+1) << (aux1->Siguiente->PosY+1) << " [dir=both];\n";
+                archivo << "nodo" << aux1 << " -> " << "nodo" << aux1->Siguiente << " [dir=both];\n";
                 aux1 = aux1->Siguiente;
             }
             aux2 = aux2->Abajo;
@@ -215,7 +267,7 @@ void Matriz::Graficar()
         while( aux2 != 0 ) {
             aux1 = aux2;
             while( aux1->Abajo != 0 ) {
-                archivo << "nodo" << (aux1->PosX+1) << (aux1->PosY+1) << " -> " << "nodo" << (aux1->Abajo->PosX+1) << (aux1->Abajo->PosY+1) << " [dir=both];\n";
+                archivo << "nodo" << aux1 << " -> " << "nodo" << aux1->Abajo << " [dir=both];\n";
                 aux1 = aux1->Abajo;
             }
             aux2 = aux2->Siguiente;
@@ -224,6 +276,7 @@ void Matriz::Graficar()
 	} else {
 		texto = "No hay elementos en la matriz";
 	}
+
 
         archivo.close();
     std::string codigo_cmd="dot -Tjpg ";

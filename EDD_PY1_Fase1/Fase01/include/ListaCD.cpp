@@ -50,27 +50,37 @@ void ListaCD::procesarArchivo(std::string nombreArchivo)
     }
 }
 
-void ListaCD::Insertar(std::string nombre,std::string password)
+
+void ListaCD::Insertar(std::string nombre, std::string password)
 {
-    NodoCD *nuevo = new NodoCD(nombre,password);
-    if (this->Primero == 0)
+    NodoCD *nuevo = new NodoCD(nombre, password);
+    int numero_empleado = 1 + this->Tamanio;
+    std::string codigo = (numero_empleado < 100 ? (numero_empleado < 10 ? "SC-00"+std::to_string(numero_empleado) : "SC-0"+std::to_string(numero_empleado)): "SC-"+std::to_string(numero_empleado));
+    nuevo->EmpleadoSistema->Codigo = codigo;
+    if(this->Primero == 0)
     {
+        /*------------------*/
         nuevo->Anterior = nuevo;
         nuevo->Siguiente = nuevo;
+
         this->Primero = nuevo;
         this->Tamanio++;
-    }
-    else
+    }else
     {
-        NodoCD *aux = this->Primero->Anterior; //
+        NodoCD *aux = this->Primero;
+        int contador = 1;
+        while(this->Tamanio > contador)
+        {
+            aux = aux->Siguiente;
+            contador++;
+        }
         nuevo->Anterior = aux;
-        nuevo->Siguiente = this->Primero;
-        aux->Siguiente = nuevo; //
-        this->Primero->Anterior = nuevo;
+        nuevo->Siguiente = this->Primero;//No existe en doble enlazada
+        aux->Siguiente = nuevo;
+        this->Primero->Anterior = nuevo; //No exites ne doble enlazada
         this->Tamanio++;
     }
 }
-
 
 
 void ListaCD::mostrar()

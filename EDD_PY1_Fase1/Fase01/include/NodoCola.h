@@ -7,11 +7,12 @@ class NodoCola
 {
     public:
         NodoCola *Siguiente;
+        std::string NombreP;
         Proyecto *Proyecto_C;
         std::string Prioridad;
 
 
-        NodoCola(Proyecto *nuevoProyecto, std::string prioridad);
+        NodoCola(std::string nombreP,Proyecto *nuevoProyecto, std::string prioridad);
         virtual ~NodoCola();
 
     protected:

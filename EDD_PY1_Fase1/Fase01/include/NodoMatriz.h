@@ -2,6 +2,10 @@
 #define NODOMATRIZ_H
 
 #include <string>
+#include "Proyecto.h"
+#include "Empleado.h"
+#include "ListaDoble.h"
+
 using namespace std;
 
 class NodoMatriz
@@ -11,13 +15,12 @@ class NodoMatriz
         NodoMatriz *Anterior;
         NodoMatriz *Abajo;
         NodoMatriz *Arriba;
-
-        int PosX;
         int PosY;
-
-        std::string Coordenada;
-
-        NodoMatriz(std::string coordenada, int x, int y);
+        int PosX;
+        Proyecto *Proyecto_c;
+        Empleado *Encargado_c;
+        ListaDoble *Tareas;
+        NodoMatriz(Proyecto *proyecto, Empleado *encargado, int posy, int posx);
         virtual ~NodoMatriz();
 
     protected:

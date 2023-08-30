@@ -12,11 +12,11 @@ Cola::~Cola()
     //dtor
 }
 
-void Cola::Encolar(std::string Nombre, std::string TipoPrioridad)
+void Cola::Encolar(std::string NombreP,std::string Nombre, std::string TipoPrioridad)
 {
     int numero_proyecto = 100 + this->Tamanio;
     Proyecto *nuevoProyecto = new Proyecto("PY-"+std::to_string(numero_proyecto),Nombre); //genera un proyecto
-    NodoCola *nuevoNodo = new NodoCola(nuevoProyecto,TipoPrioridad);
+    NodoCola *nuevoNodo = new NodoCola(NombreP,nuevoProyecto,TipoPrioridad);
     if(this->Primero == 0) //si esta vacia
     {
         this->Primero = nuevoNodo;
@@ -39,7 +39,9 @@ void Cola::VerProyectos()
     int contador = 0;
     while(aux)
     {
+        cout << aux->NombreP << endl;
         cout << aux->Proyecto_C->Nombre << endl;
+        cout << aux->Prioridad << endl;
         aux = aux->Siguiente;
         contador++;
     }

@@ -94,7 +94,7 @@
 1693354113 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\empleado.h
 	<string>
 
-1693354113 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listacd.cpp
+1693381879 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listacd.cpp
 	"ListaCD.h"
 
 1693354718 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listacd.h
@@ -111,26 +111,34 @@
 	<string>
 	<Empleado.h>
 
-1693354113 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\matriz.cpp
+1693382278 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\matriz.cpp
 	"Matriz.h"
 
-1693354113 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\matriz.h
+1693381649 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\matriz.h
 	<fstream>
 	<iostream>
 	<string>
 	<string.h>
 	"NodoMatriz.h"
+	"NodoCD.h"
+	"Cola.h"
+	"Proyecto.h"
+	"Empleado.h"
+	"ListaCD.h"
 
-1693354113 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodomatriz.h
+1693382169 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodomatriz.h
 	<string>
+	"Proyecto.h"
+	"Empleado.h"
+	"ListaDoble.h"
 
 1693354113 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocd.cpp
 	"NodoCD.h"
 
-1693354113 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocola.cpp
+1693385427 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocola.cpp
 	"NodoCola.h"
 
-1693354113 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocola.h
+1693385427 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodocola.h
 	<Proyecto.h>
 
 1693354113 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\proyecto.h
@@ -141,16 +149,16 @@
 
 1693354113 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nododoble.h
 
-1693354113 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodomatriz.cpp
+1693382180 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodomatriz.cpp
 	"NodoMatriz.h"
 
 1693354113 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\proyecto.cpp
 	"Proyecto.h"
 
-1693367966 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.cpp
+1693385589 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.cpp
 	"Cola.h"
 
-1693355496 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.h
+1693385318 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.h
 	<NodoCola.h>
 	<Proyecto.h>
 	<string>
@@ -158,10 +166,23 @@
 	<iostream>
 	<fstream>
 
-1693368164 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\main.cpp
+1693384644 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\main.cpp
 	<iostream>
 	"ListaCD.h"
 	"Cola.h"
 	"Matriz.h"
 	<string>
+
+1693381314 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listadoble.cpp
+	"ListaDoble.h"
+
+1693381342 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listadoble.h
+	"NodoListaDoble.h"
+	<string>
+
+1693381409 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodolistadoble.h
+	<string>
+
+1693381381 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\nodolistadoble.cpp
+	"NodoListaDoble.h"
 

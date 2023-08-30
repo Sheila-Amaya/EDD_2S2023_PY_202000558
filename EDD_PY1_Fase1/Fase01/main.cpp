@@ -10,7 +10,9 @@ using namespace std;
 
 //
 ListaCD listaC; // lista circular doblemente enlazada
-Cola cola;
+Cola cola; // cola prioridad
+Matriz matriz;
+ListaDoble doble;// lista doblemente enlazada
 
 bool iniciarSesion();
 void mostrarMenu();
@@ -29,7 +31,6 @@ int main()
 
     return 0;
 }
-
 
 
 //funcion para iniciar sesion
@@ -59,6 +60,7 @@ bool iniciarSesion()
     return false;
 }
 
+
 void cargaManual()
 {
     string nombre,password;
@@ -68,8 +70,6 @@ void cargaManual()
     cin >> nombre;
     cout << "\tPassword:" ;
     cin >> password;
-    //cout << "Puestos Disponibles" ;
-    //mostrar de la LD pusetos disponibles
 
     listaC.Insertar(nombre,password);
 
@@ -85,7 +85,8 @@ void cargaMasiva()
     string rutaRelativa = "../Archivo Entrada/" + nombreArchivo;
 
     listaC.procesarArchivo(rutaRelativa);
-    listaC.mostrar();
+    cout << "\tCarga realizada con exito...\n ";
+    //listaC.mostrar();
 }
 
 
@@ -128,7 +129,7 @@ void mostrarSubMenu()
 
 
 //submenu crear proyecto
-void mostrarSubMenu1()
+void CrearP()
 {
         cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
         cout << "\t============= Bienvenido PM-202000558 =============" << endl;
@@ -136,9 +137,9 @@ void mostrarSubMenu1()
 
         string nombreP ,prioridad;
 
-        cout << "\tIngrese el nombre del proyecto: " ;
+        cout << "\tNombre del proyecto: " ;
         cin >> nombreP;
-        cout << "\tIngrese tipo de prioridad (A-C): " ;
+        cout << "\tTipo de prioridad (A-C): " ;
         cin >> prioridad;
 
         // Validar que la prioridad ingresada sea A, B o C
@@ -147,31 +148,43 @@ void mostrarSubMenu1()
             cout << "\tPrioridad no valida. Ingrese tipo de prioridad (A-C): ";
             cin >> prioridad;
         }
-        cola.Encolar(nombreP,prioridad);
+
 
         NodoCola *ultimoProyecto = cola.getUltimoProyecto();
         if (ultimoProyecto) { //si no es 0
             cout << "\tCreado exitosamente: " << ultimoProyecto->Proyecto_C->Nombre << endl;
-        } else {
-            cout << "\tNingun proyecto en cola" << endl;
+            cola.Encolar(nombreP,ultimoProyecto->Proyecto_C->Nombre,prioridad);
         }
 
 
         //cout << "PROYECTOS\n";
-        //cola.VerProyectos();
+        cola.VerProyectos();
 
 
 }
 
+void asignarProyecto()
+{
+
+}
+
+
 //submenu crear tareas
-void mostrarSubMenu2()
+void CrearT()
 {
 
         cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
         cout << "\t============= Bienvenido PM-202000558 =============" << endl;
-        cout << "\t=============     MENU DE TAREAS     =============\n" << endl; //crear tarea y asignar
+        cout << "\t=============     MENU DE TAREAS     =============\n" << endl;
 
 }
+
+
+void asignarTarea()
+{
+
+}
+
 
 void reportes()
 {
@@ -218,10 +231,12 @@ void mostrarMenu()
         cout << "\t============= Bienvenido PM-202000558 =============\n" << endl;
         cout << "\t1. Cargar Empleados" << endl;
         cout << "\t2. Crear Proyecto" << endl;
-        cout << "\t3. Crear Tareas" << endl;
-        cout << "\t4. Asignar Tareas" << endl;
-        cout << "\t5. Reportes" << endl;
-        cout << "\t6. Salir" << endl;
+        cout << "\t3. Asignar Proyecto" << endl;
+
+        cout << "\t4. Crear Tareas" << endl;
+        cout << "\t5. Asignar Tareas" << endl;
+        cout << "\t6. Reportes" << endl;
+        cout << "\t7. Salir" << endl;
         cout << "\n\tElija una opcion: ";
         cout << "";
         cin >> opcion;
@@ -232,22 +247,26 @@ void mostrarMenu()
                 break;
 
             case 2:
-                mostrarSubMenu1();
+                CrearP();
                 break;
 
             case 3:
-                mostrarSubMenu2();
+                asignarProyecto();
                 break;
 
             case 4:
-                cout << "op4";
+                CrearT();
                 break;
 
             case 5:
-                reportes();
+                asignarTarea();
                 break;
 
             case 6:
+                reportes();
+                break;
+
+            case 7:
                 exit(0);
                 break;
 
@@ -257,7 +276,7 @@ void mostrarMenu()
                 break;
         }
 
-    } while (opcion != 5);
+    } while (opcion != 7);
 }
 
 
