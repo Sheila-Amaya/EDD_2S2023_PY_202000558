@@ -26,6 +26,7 @@ class ListaCD //Lista circular doblemente enlazada
 
         void Insertar(std::string nombre, ::string password);//funcion para agregar a la lista
         void mostrar();
+        void mostrarE();
         void procesarArchivo(std::string nombre_archivo);
         void graficar();
 

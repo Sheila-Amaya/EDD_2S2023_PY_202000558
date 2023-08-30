@@ -100,6 +100,22 @@ void ListaCD::mostrar()
 
 }
 
+
+void ListaCD::mostrarE()
+{
+   NodoCD *aux = this->Primero;
+   int contador = 0;
+   while(this->Tamanio > contador)
+   {
+       cout << "\tNombre Empleado :" << aux->EmpleadoSistema->Nombre << endl;
+
+       aux = aux->Siguiente;
+       contador++;
+   }
+
+
+}
+
 std::string ListaCD::g_circular(NodoCD *&raiz, int tamanio) {
     std::string cuerpo = "";
     NodoCD *aux = raiz;

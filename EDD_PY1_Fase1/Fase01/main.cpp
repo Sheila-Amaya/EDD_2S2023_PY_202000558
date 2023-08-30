@@ -13,10 +13,10 @@
 using namespace std;
 
 //
-ListaCD listaC; // lista circular doblemente enlazada
-Cola cola; // cola prioridad
-Matriz matriz;
-ListaDoble lista_doble;// lista doblemente enlazada
+ListaCD listaC; // lista circular doblemente enlazada EMPLEADOS
+Cola cola; // cola prioridad   PROYECTOS
+Matriz matriz;  PROYECTO VS EMPELADO
+ListaDoble lista_doble;// lista doblemente enlazada TAREAS
 
 bool iniciarSesion();
 void mostrarMenu();
@@ -180,20 +180,38 @@ string generarCodigoTarea(string tipo) {
 }
 
 
-void asignarProyecto() {
+void confi() {
     cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
     cout << "\t============= Bienvenido PM-202000558 =============" << endl;
-    cout << "\t============= ASIGNAR TAREA A PROYECTO =============\n" << endl;
 
+    cout << "\n\t================ ASIGNAR PROYECTO =================" << endl;
+
+    //mostrar Empleados disponibles
+    cout << "\n\tEmpleados disponibles para asignar :\n";
+    listaC.mostrarE();
+    string empleadoAsignado;
+    cout << "\n\tIngrese el nombre del empleado: ";
+    cin >> empleadoAsignado;
+
+    // Generar código de Empleado aleatorio
+    string codE;
+    cout << "\tIngrese el codigo Empleado: ";
+    cin >>codE;
+
+    string codigoTarea = generarCodigoTarea(codE);
+
+    cout << "\n\t====================================================\n" << endl;
+
+    cout << "\n\t=================== CREAR TAREA ====================\n" << endl;
     // Mostrar proyectos disponibles
     NodoCola *aux = cola.Primero; // Obtener el primer proyecto en la cola
 
     if (!aux) {
-        cout << "No hay proyectos disponibles para asignar una tarea." << endl;
+        cout << "\tNo hay proyectos disponibles para asignar una tarea." << endl;
         return;
     }
 
-    cout << "\tProyectos disponibles para asignar tarea:\n";
+    cout << "\n\tProyectos disponibles para asignar tarea:\n";
     while (aux) {
         cout << "\tCodigo: " << aux->Proyecto_C->Codigo << ", Nombre: " << aux->Proyecto_C->Nombre <<  endl;
         aux = aux->Siguiente;
@@ -208,7 +226,7 @@ void asignarProyecto() {
     bool proyectoEncontrado = false;
 
     while (aux) {
-        if (aux->Proyecto_C->Codigo == codigoProyecto) {
+        if (aux->Proyecto_C->Nombre == codigoProyecto) {
             cout << "\tHa seleccionado el proyecto: " << aux->Proyecto_C->Nombre << endl;
             proyectoEncontrado = true;
             break;
@@ -225,37 +243,19 @@ void asignarProyecto() {
     cout << "\tIngrese el tipo de tarea: ";
     cin >>nombreTarea;
 
-    // Generar código de tarea aleatorio
-    string codE;
-    cout << "\tIngrese el codigo Empleado: ";
-    cin >>codE;
 
-
-    string codigoTarea = generarCodigoTarea(codE);
 
     // Insertar la tarea en la ListaDoble
     lista_doble.Insertar(codigoTarea, nombreTarea, codE);
 
-    cout << "\tTarea asignada al proyecto exitosamente." << endl;
-}
 
+    cout << "\tTarea asignada exitosamente." << endl;
 
-//submenu crear tareas
-void CrearT()
-{
-        cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
-        cout << "\t============= Bienvenido PM-202000558 =============" << endl;
-        cout << "\t=============     MENU DE TAREAS     =============\n" << endl;
-
+    //asignacion proyecto matriz dispersa
 
 
 }
 
-
-void asignarTarea()
-{
-
-}
 
 
 void reportes()
@@ -280,7 +280,8 @@ void reportes()
 
             switch (opcion) {
             case 1:
-                cout << "nada aun";
+                matriz.Graficar();
+                reportes();
                 break;
 
             case 2:
@@ -321,11 +322,9 @@ void mostrarMenu()
         cout << "\t============= Bienvenido PM-202000558 =============\n" << endl;
         cout << "\t1. Cargar Empleados" << endl;
         cout << "\t2. Crear Proyecto" << endl;
-        cout << "\t3. Asignar Proyecto" << endl;
-        cout << "\t4. Crear Tareas" << endl;
-        cout << "\t5. Asignar Tareas" << endl;
-        cout << "\t6. Reportes" << endl;
-        cout << "\t7. Salir" << endl;
+        cout << "\t3. configuracion" << endl;
+        cout << "\t4. Reportes" << endl;
+        cout << "\t5. Salir" << endl;
         cout << "\n\tElija una opcion: ";
         cout << "";
         cin >> opcion;
@@ -340,22 +339,15 @@ void mostrarMenu()
                 break;
 
             case 3:
-                asignarProyecto();
+                confi();
                 break;
+
 
             case 4:
-                CrearT();
-                break;
-
-            case 5:
-                asignarTarea();
-                break;
-
-            case 6:
                 reportes();
                 break;
 
-            case 7:
+            case 5:
                 exit(0);
                 break;
 
@@ -365,7 +357,7 @@ void mostrarMenu()
                 break;
         }
 
-    } while (opcion != 7);
+    } while (opcion != 5);
 }
 
 

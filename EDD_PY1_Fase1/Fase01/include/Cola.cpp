@@ -110,7 +110,7 @@ std::string Cola::g_cola(NodoCola *&raiz, int tamanio) {
         cuerpo += std::to_string(i);
         cuerpo += "[label=\"{";
         cuerpo +=  aux->Proyecto_C->Nombre + " \\n ";
-        cuerpo +=  aux->Prioridad;
+        cuerpo +=  "Prioridad: " +aux->Prioridad;
         cuerpo += "}\"]; \n";
         aux = aux->Siguiente;
     }
