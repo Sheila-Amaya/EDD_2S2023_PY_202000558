@@ -56,7 +56,7 @@ std::string ListaDoble::g_circular(NodoListaDoble *&raiz, int tamanio){
         cuerpo += "nodo";
         cuerpo += std::to_string(i);
         cuerpo += "[label=\"";
-        cuerpo += "Código: " + aux->Codigo + "\\n";
+        cuerpo += "Codigo: " + aux->Codigo + "\\n";
         cuerpo += "Tarea: " + aux->Nombre_Tarea + "\\n";
         cuerpo += "\"]; \n";
         aux = aux->Siguiente;
@@ -85,16 +85,21 @@ std::string ListaDoble::g_circular(NodoListaDoble *&raiz, int tamanio){
 
 void ListaDoble::graficar(){
     ofstream archivo;
-    archivo.open("Lista_doble.dot",ios::out);
+    string ruta_reportes = "../Reportes/";
+    string nombre_archivo_dot = "Lista_doble.dot"; // Cambiar el nombre del archivo
+    string nombre_imagen = "Lista_doble.jpg"; // Cambiar el nombre del archivo
+
+    archivo.open(ruta_reportes + nombre_archivo_dot, ios::out);
     if (archivo.fail()){
-        cout << "se produjo un error al generar el recorrido inorden" << endl;
+        cout << "Se produjo un error al generar el archivo DOT" << endl;
     }else{
-        archivo<<"digraph lista{\n rankdir=LR;\n node[shape = record]; \n nodonull1[label=\"null\"];\n nodonull2[label=\"null\"];\n"<<g_circular(this->Primero,this->Tamanio)<<" \n}";
+        archivo << "digraph lista{\n rankdir=LR;\n node[shape = record]; \n nodonull1[label=\"null\"];\n nodonull2[label=\"null\"];\n"<<g_circular(this->Primero,this->Tamanio)<<" \n}";
         archivo.close();
     }
     try{
-        system("dot -Tjpg Lista_doble.dot -o Lista_doble.jpg");
+        system(("dot -Tjpg " + ruta_reportes + nombre_archivo_dot + " -o " + ruta_reportes + nombre_imagen).c_str());
+        cout << "\n\tSe genero el reporte con exito\n" << endl;
     }catch(exception e){
-        cout << "Se produjo un error al correr el .dot" << endl;
+        cout << "Se produjo un error al generar la imagen '" << nombre_imagen << "'." << endl;
     }
 }

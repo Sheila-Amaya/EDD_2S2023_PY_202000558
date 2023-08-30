@@ -1,0 +1,13 @@
+digraph lista{
+ rankdir=LR;
+ node[shape = record]; 
+ nodonull1[label="null"];
+ nodonull2[label="null"];
+nodo0[label="Codigo: DEV-042\nTarea: nube\n"]; 
+nodo1[label="Codigo: QA-486\nTarea: company\n"]; 
+nodonull1 -> nodo0 [dir=back];
+nodo0 -> nodo1
+nodo1 -> nodo0
+
+nodo1 -> nodonull2 
+}

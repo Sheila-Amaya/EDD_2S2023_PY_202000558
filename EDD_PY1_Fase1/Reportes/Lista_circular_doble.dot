@@ -3,15 +3,18 @@ digraph lista{
  node[shape = record]; 
 nodo0[label="Nombre: Eli\nCódigo: SC-001"]; 
 nodo1[label="Nombre: Ashlie\nCódigo: SC-002"]; 
-nodo2[label="Nombre: Brunno Milanezo\nCódigo: SC-003"]; 
-nodo3[label="Nombre: Cloe \nCódigo: SC-004"]; 
+nodo2[label="Nombre: Hazel\nCódigo: SC-003"]; 
+nodo3[label="Nombre: Brunno Milanezo\nCódigo: SC-004"]; 
+nodo4[label="Nombre: Cloe \nCódigo: SC-005"]; 
 nodo0 -> nodo1
 nodo1 -> nodo0
 nodo1 -> nodo2
 nodo2 -> nodo1
 nodo2 -> nodo3
 nodo3 -> nodo2
-nodo3 -> nodo0
-nodo0 -> nodo3
+nodo3 -> nodo4
+nodo4 -> nodo3
+nodo4 -> nodo0
+nodo0 -> nodo4
  
 }

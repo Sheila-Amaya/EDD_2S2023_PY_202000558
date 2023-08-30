@@ -5,6 +5,10 @@
 #include "Matriz.h"
 
 #include <string>
+#include <sstream>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
 
 using namespace std;
 
@@ -162,8 +166,21 @@ void CrearP()
 
 }
 
-void asignarProyecto()
-{
+// Función para generar un número aleatorio en un rango dado
+int generarNumeroAleatorio(int min, int max) {
+    return min + (rand() % (max - min + 1));
+}
+
+// Función para generar el código de tarea en el formato especificado
+string generarCodigoTarea(string tipo) {
+    int numero = generarNumeroAleatorio(1, 999);
+    ostringstream ss;
+    ss << tipo << "-" << setfill('0') << setw(3) << numero;
+    return ss.str();
+}
+
+
+void asignarProyecto() {
     cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
     cout << "\t============= Bienvenido PM-202000558 =============" << endl;
     cout << "\t============= ASIGNAR TAREA A PROYECTO =============\n" << endl;
@@ -178,20 +195,20 @@ void asignarProyecto()
 
     cout << "\tProyectos disponibles para asignar tarea:\n";
     while (aux) {
-        cout << "\tCodigo: " << aux->Proyecto_C->Nombre << ", Nombre: " << aux->Proyecto_C->Codigo <<  endl;
+        cout << "\tCodigo: " << aux->Proyecto_C->Codigo << ", Nombre: " << aux->Proyecto_C->Nombre <<  endl;
         aux = aux->Siguiente;
     }
 
     // Elegir un proyecto por su código
     string codigoProyecto;
-    cout << "\\tnIngrese el codigo del proyecto al que desea asignar una tarea: ";
+    cout << "\n\tIngrese el codigo del proyecto al que desea asignar una tarea: ";
     cin >> codigoProyecto;
 
     aux = cola.Primero; // Reiniciar aux al primer proyecto
     bool proyectoEncontrado = false;
 
     while (aux) {
-        if (aux->Proyecto_C->Nombre == codigoProyecto) {
+        if (aux->Proyecto_C->Codigo == codigoProyecto) {
             cout << "\tHa seleccionado el proyecto: " << aux->Proyecto_C->Nombre << endl;
             proyectoEncontrado = true;
             break;
@@ -200,18 +217,26 @@ void asignarProyecto()
     }
 
     if (!proyectoEncontrado) {
-        cout << "\tNo se encontro un proyecto con ese codigo." << endl;
+        cout << "\tNo se encontro un proyecto con ese código." << endl;
         return;
     }
 
-        // Obtener los valores de la tarea del proyecto seleccionado
-        string codigoTarea = aux->Proyecto_C->Nombre; // Código de la tarea desde el atributo Nombre
-        string nombreTarea = aux->Proyecto_C->Codigo; // Nombre de la tarea desde el atributo Codigo
+    string nombreTarea;
+    cout << "\tIngrese el tipo de tarea: ";
+    cin >>nombreTarea;
 
-        // Insertar la tarea en la ListaDoble
-      //lista_doble.Insertar(codigoTarea, nombreTarea, codigoEncargado);
+    // Generar código de tarea aleatorio
+    string codE;
+    cout << "\tIngrese el codigo Empleado: ";
+    cin >>codE;
 
-        cout << "\tTarea asignada al proyecto exitosamente." << endl;
+
+    string codigoTarea = generarCodigoTarea(codE);
+
+    // Insertar la tarea en la ListaDoble
+    lista_doble.Insertar(codigoTarea, nombreTarea, codE);
+
+    cout << "\tTarea asignada al proyecto exitosamente." << endl;
 }
 
 
@@ -266,10 +291,12 @@ void reportes()
 
             case 3:
                 listaC.graficar();
+                reportes();
                 break;
 
             case 4:
                 lista_doble.graficar();
+                reportes();
                 break;
 
             case 5:

@@ -166,14 +166,18 @@
 	<iostream>
 	<fstream>
 
-1693425038 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\main.cpp
+1693431555 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\main.cpp
 	<iostream>
 	"ListaCD.h"
 	"Cola.h"
 	"Matriz.h"
 	<string>
+	<sstream>
+	<cstdlib>
+	<ctime>
+	<iomanip>
 
-1693415649 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listadoble.cpp
+1693432175 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listadoble.cpp
 	"ListaDoble.h"
 
 1693415704 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\listadoble.h
