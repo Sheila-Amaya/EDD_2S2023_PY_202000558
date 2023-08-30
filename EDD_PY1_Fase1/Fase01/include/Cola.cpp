@@ -31,18 +31,6 @@ void Cola::Encolar(std::string Nombre, std::string TipoPrioridad)
         this->Tamanio++;
     }
 
-    /**
-    1. Crear una funcion que tenga una cola temporal, una copia de la cola actual
-    2. Cola temporal, le aplican un ordenamiento.
-    3. this->Primero = colaTemp.Primero
-
-    funcion Orderna
-        *colatemp = this->primero
-        ordenamientoBurbuja(colatemp)
-
-    PY-100 | B - PY-101 | B - PY-102 | A
-    PY-102 - PY-100 - PY-101
-    */
 }
 
 void Cola::VerProyectos()
@@ -148,7 +136,7 @@ void Cola::graficar() {
 
     archivo.open(ruta_reportes + nombre_archivo, ios::out);
     if (archivo.fail()) {
-        cout << "Se produjo un error al generar el archivo " << nombre_archivo << endl;
+        cout << "\n\tSe produjo un error al generar el reporte " << nombre_archivo << endl;
     } else {
         if (this->Primero != nullptr) {
             archivo << "digraph cola {\n rankdir=LR;\n node[shape = record]; \n"
@@ -161,7 +149,7 @@ void Cola::graficar() {
         archivo.close();
         try {
             system(("dot -Tjpg " + ruta_reportes + nombre_archivo + " -o " + ruta_reportes + nombre_imagen).c_str());
-            cout << "Se genero la imagen " << nombre_imagen << " con exito" << endl;
+            cout << "\n\tSe genero el reporte con exito" << endl;
         } catch (exception e) {
             cout << "Se produjo un error al generar la imagen " << nombre_imagen <<  endl;
         }

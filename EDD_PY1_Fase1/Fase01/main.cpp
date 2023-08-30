@@ -161,7 +161,6 @@ void mostrarSubMenu1()
         //cola.VerProyectos();
 
 
-
 }
 
 //submenu crear tareas
@@ -174,6 +173,41 @@ void mostrarSubMenu2()
 
 }
 
+void reportes()
+{
+
+        cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
+        cout << "\t============= Bienvenido PM-202000558 =============" << endl;
+        cout << "\t=============     AREA DE REPORTES     =============\n" << endl;
+
+        int opcion;
+
+        do {
+            cout << "\t1. Reporte de la matriz dispersa" << endl;
+            cout << "\t2. Reporte de la cola" << endl;
+            cout << "\t3. Regresar" << endl;
+            cout << "";
+            cout << "\n\tElija una opcion: ";
+            cin >> opcion;
+
+            switch (opcion) {
+            case 1:
+                cout << "nada aun";
+                break;
+
+            case 2:
+                cola.Ordenar();
+                cola.graficar();
+                break;
+
+            case 3:
+                mostrarSubMenu();
+                break;
+
+        }
+
+    } while (opcion != 3);
+}
 
 void mostrarMenu()
 {
@@ -186,7 +220,8 @@ void mostrarMenu()
         cout << "\t2. Crear Proyecto" << endl;
         cout << "\t3. Crear Tareas" << endl;
         cout << "\t4. Asignar Tareas" << endl;
-        cout << "\t5. Salir" << endl;
+        cout << "\t5. Reportes" << endl;
+        cout << "\t6. Salir" << endl;
         cout << "\n\tElija una opcion: ";
         cout << "";
         cin >> opcion;
@@ -205,11 +240,14 @@ void mostrarMenu()
                 break;
 
             case 4:
-                cout << "cola";
-                cola.graficar();
+                cout << "op4";
                 break;
 
             case 5:
+                reportes();
+                break;
+
+            case 6:
                 exit(0);
                 break;
 

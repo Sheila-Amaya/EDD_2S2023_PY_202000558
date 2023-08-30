@@ -147,7 +147,7 @@
 1693354113 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\proyecto.cpp
 	"Proyecto.h"
 
-1693355873 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.cpp
+1693367966 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.cpp
 	"Cola.h"
 
 1693355496 c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\include\cola.h
@@ -158,7 +158,7 @@
 	<iostream>
 	<fstream>
 
-1693355298 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\main.cpp
+1693368164 source:c:\users\amaya\onedrive\documents\github\edd_2s2023_py_202000558\edd_py1_fase1\fase01\main.cpp
 	<iostream>
 	"ListaCD.h"
 	"Cola.h"
