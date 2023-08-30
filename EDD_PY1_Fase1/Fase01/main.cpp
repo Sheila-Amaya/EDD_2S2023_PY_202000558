@@ -12,7 +12,7 @@ using namespace std;
 ListaCD listaC; // lista circular doblemente enlazada
 Cola cola; // cola prioridad
 Matriz matriz;
-ListaDoble doble;// lista doblemente enlazada
+ListaDoble lista_doble;// lista doblemente enlazada
 
 bool iniciarSesion();
 void mostrarMenu();
@@ -164,7 +164,54 @@ void CrearP()
 
 void asignarProyecto()
 {
+    cout << "\n\t=============      EDD PROJECT-UP     =============" << endl;
+    cout << "\t============= Bienvenido PM-202000558 =============" << endl;
+    cout << "\t============= ASIGNAR TAREA A PROYECTO =============\n" << endl;
 
+    // Mostrar proyectos disponibles
+    NodoCola *aux = cola.Primero; // Obtener el primer proyecto en la cola
+
+    if (!aux) {
+        cout << "No hay proyectos disponibles para asignar una tarea." << endl;
+        return;
+    }
+
+    cout << "\tProyectos disponibles para asignar tarea:\n";
+    while (aux) {
+        cout << "\tCodigo: " << aux->Proyecto_C->Nombre << ", Nombre: " << aux->Proyecto_C->Codigo <<  endl;
+        aux = aux->Siguiente;
+    }
+
+    // Elegir un proyecto por su código
+    string codigoProyecto;
+    cout << "\\tnIngrese el codigo del proyecto al que desea asignar una tarea: ";
+    cin >> codigoProyecto;
+
+    aux = cola.Primero; // Reiniciar aux al primer proyecto
+    bool proyectoEncontrado = false;
+
+    while (aux) {
+        if (aux->Proyecto_C->Nombre == codigoProyecto) {
+            cout << "\tHa seleccionado el proyecto: " << aux->Proyecto_C->Nombre << endl;
+            proyectoEncontrado = true;
+            break;
+        }
+        aux = aux->Siguiente;
+    }
+
+    if (!proyectoEncontrado) {
+        cout << "\tNo se encontro un proyecto con ese codigo." << endl;
+        return;
+    }
+
+        // Obtener los valores de la tarea del proyecto seleccionado
+        string codigoTarea = aux->Proyecto_C->Nombre; // Código de la tarea desde el atributo Nombre
+        string nombreTarea = aux->Proyecto_C->Codigo; // Nombre de la tarea desde el atributo Codigo
+
+        // Insertar la tarea en la ListaDoble
+      //lista_doble.Insertar(codigoTarea, nombreTarea, codigoEncargado);
+
+        cout << "\tTarea asignada al proyecto exitosamente." << endl;
 }
 
 
@@ -222,7 +269,7 @@ void reportes()
                 break;
 
             case 4:
-                doble.graficar();
+                lista_doble.graficar();
                 break;
 
             case 5:
