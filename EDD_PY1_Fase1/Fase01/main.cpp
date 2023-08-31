@@ -261,7 +261,7 @@ void confi() {
     matriz.insertar_empleado(&listaC);
     //matriz.asignarProyecto(empleadoAsignado,codigoProyecto);
 
-    matriz.Graficar();
+    //matriz.Graficar();
 
 
 }
