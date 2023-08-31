@@ -15,7 +15,7 @@ using namespace std;
 //
 ListaCD listaC; // lista circular doblemente enlazada EMPLEADOS
 Cola cola; // cola prioridad   PROYECTOS
-Matriz matriz;  PROYECTO VS EMPELADO
+Matriz matriz;  //PROYECTO VS EMPELADO
 ListaDoble lista_doble;// lista doblemente enlazada TAREAS
 
 bool iniciarSesion();
@@ -252,6 +252,16 @@ void confi() {
     cout << "\tTarea asignada exitosamente." << endl;
 
     //asignacion proyecto matriz dispersa
+    while(cola.Primero)
+    {
+        matriz.insertar_proyecto(&cola);
+        cola.Descolar();
+    }
+
+    matriz.insertar_empleado(&listaC);
+    //matriz.asignarProyecto(empleadoAsignado,codigoProyecto);
+
+    matriz.Graficar();
 
 
 }

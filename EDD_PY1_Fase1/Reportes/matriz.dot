@@ -1,0 +1,17 @@
+digraph MatrizCapa{ 
+ node[shape=box] 
+ rankdir=UD;
+{rank=same; 
+nodo0x1111be0[label="\n" ,group=0]; 
+nodo0x1111c50[label="a" ,group=1]; 
+} 
+{rank=same; 
+nodo0x762530[label="Brunno Milanezo" ,group=0]; 
+} 
+{rank=same; 
+nodo0x7625a0[label="Cloe " ,group=0]; 
+} 
+nodo0x1111be0 -> nodo0x1111c50 [dir=both];
+nodo0x1111be0 -> nodo0x762530 [dir=both];
+nodo0x762530 -> nodo0x7625a0 [dir=both];
+} 
