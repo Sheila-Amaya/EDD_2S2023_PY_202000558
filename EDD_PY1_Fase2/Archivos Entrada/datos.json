@@ -1,0 +1,35 @@
+{
+    "Proyectos":[
+        {
+            "id":"PY-100",
+            "nombre":"Sistema de inventario Vestidos Julieta",
+            "tareas": [
+                {
+                    "nombre":"Generar Consultas del area de destornilladores",
+                    "empleado":"BDEV-452"
+                },
+                {
+                    "nombre":"Mostrar Herramientas de trabajo",
+                    "empleado":"FDEV-414"
+                },
+                {
+                    "nombre":"Probar barra de busqueda",
+                    "empleado":"QA-123"
+                }
+            ],
+            "prioridad":"B"
+        },
+        {
+            "id":"PY-101",
+            "nombre":"Tienda Online Restaurante Giovanni",
+            "tareas":[],
+            "prioridad":"B"
+        },
+        {
+            "id":"PY-102",
+            "nombre":"Sistema de inventario EPA",
+            "tareas":[],
+            "prioridad":"A"
+        }
+    ]
+}
