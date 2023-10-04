@@ -166,4 +166,4 @@ class ArbolB():
     
 #arbol = ArbolB()
 #arbol.insertar('T1-PY-100')
-#arbol.graficar()
+#arbol.graficar() 

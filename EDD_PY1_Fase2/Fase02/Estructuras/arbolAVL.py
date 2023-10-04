@@ -1,4 +1,4 @@
-from nodoAVL import Nodo_AVL
+from Estructuras.nodoAVL import Nodo_AVL
 import os
 
 class Arbol_AVL():
@@ -104,7 +104,6 @@ class Arbol_AVL():
         a.close()
         os.system("dot -Tjpg arbolAVL.dot -o " + archivo)
         #os.system(archivo)
-
 
     def retornarValoresArbol(self, raiz, id):
         cadena = ''
