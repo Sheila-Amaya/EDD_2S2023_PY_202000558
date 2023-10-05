@@ -1,5 +1,3 @@
-
-
 class Proyecto:
     def __init__(self,idProyecto,nombreProyecto,tareas,prioridad):
         self.idProyecto = idProyecto
