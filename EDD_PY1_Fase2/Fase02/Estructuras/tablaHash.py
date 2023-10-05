@@ -71,25 +71,46 @@ class TablaHash():
             nuevaPosicion = self.nuevoIndice(nuevaPosicion)
         return nuevaPosicion
     
+
     def buscar(self, codigo, password):
+            indice = self.calculoIndice(codigo)
+            if indice < self.capacidad:
+                try:
+                    contador = 0
+                    while True:
+                        nuevo_indice = self.reCalculoIndice(codigo, contador)
+                        if nuevo_indice in self.tabla:
+                            empleado = self.tabla[nuevo_indice]
+                            if empleado.codigo == codigo and empleado.password == password:
+                                return True
+                        else:
+                            return False
+                        contador += 1
+                except:
+                    print("Error")
+            return False
+    
+    def buscarM(self, codigo, password):
         indice = self.calculoIndice(codigo)
         if indice < self.capacidad:
             try:
-                if (indice in self.tabla):
-                    empleado =  self.tabla[indice]
-                    if empleado.codigo == codigo and empleado.password == password:
-                        return True
-                elif not (indice in self.tabla):
-                    return False
-                else:
-                    contador = 1
-                    indice = self.reCalculoIndice(codigo, contador)
-                    while not (indice in self.tabla):
-                        contador += 1
-                        indice = self.reCalculoIndice(codigo, contador)
-                        empleado =  self.tabla[indice]
+                contador = 0
+                while True:
+                    nuevo_indice = self.reCalculoIndice(codigo, contador)
+                    if nuevo_indice in self.tabla:
+                        empleado = self.tabla[nuevo_indice]
                         if empleado.codigo == codigo and empleado.password == password:
-                            return True
+                            if empleado.puesto == "Project Manager":
+                                return True
+                    else:
+                        return False
+                    contador += 1
             except:
                 print("Error")
         return False
+
+
+
+
+
+

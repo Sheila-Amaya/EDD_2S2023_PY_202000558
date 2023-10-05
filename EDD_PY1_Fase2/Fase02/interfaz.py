@@ -54,28 +54,6 @@ class App():
         button = ctk.CTkButton(master=frame, text='Login', command=self.login)
         button.pack(pady=12, padx=10)
 
-    def login(self):
-        # Obtener las entradas del usuario y la contraseña desde los campos de entrada
-        username = self.user_entry.get()
-        password = self.user_pass.get()
-        print(username,password)
-
-        if self.user_entry.get() == "admi" and self.user_pass.get() == "admi":
-            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente")
-            self.app.iconify() # minimiza la ventana actual
-            self.ventana2() # Abrir una nueva ventana
-        elif tablaGlobal.buscar(username, password):
-            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente")
-            self.app.iconify() # minimiza la ventana actual
-            self.ventana2() # Abrir una nueva ventana
-        elif self.user_entry.get() == username and self.user_pass.get() != password:
-            tkmb.showwarning(title='Wrong password', message='Por favor revisa tu contraseña')
-        elif self.user_entry.get() != username and self.user_pass.get() == password:
-            tkmb.showwarning(title='Wrong username', message='Por favor revisa tu usuario')
-        else:
-            tkmb.showerror(title="Login Failed", message="Contraseña o usuario incorrectos")
-
-
     def ventana2(self):
         # Create a new window
         new_window = ctk.CTk()
@@ -92,15 +70,15 @@ class App():
         # Establecer la geometría de la ventana
         new_window.geometry("%dx%d+%d+%d" % (ancho_ventana, alto_ventana, x, y))
 
-        # Create a menu bar
+        # Crea a menu bar
         menubar = tk.Menu(new_window)
         new_window.config(menu=menubar)
 
-        # Create a "File" menu
+        # Crea "File" en el menubar
         file_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="File", menu=file_menu)
 
-        # Add "Open CSV" menu item
+        # "Open CSV" 
         def open_csv():
             ruta_archivo = filedialog.askopenfilename(filetypes=[("Archivos CSV", "*.csv")])
             if ruta_archivo:
@@ -112,19 +90,29 @@ class App():
                         id, nombre, password, puesto = fila
                         tablaGlobal.Insertar(id, nombre, password, puesto)
                 AgregarTabla()
-        
+
         file_menu.add_command(label="Open CSV", command=open_csv)
 
         # Add "Exit" menu item
-        def exit_app():
+        def cerrarSesion():
             new_window.destroy()
-        file_menu.add_command(label="Exit", command=exit_app)
+            nueva_app = App()  # Crea una nueva instancia de la aplicación
+            nueva_app.run()  # Inicia la nueva aplicación
+
+        file_menu.add_command(label="Cerrar sesion", command=cerrarSesion)
 
         tabla_frame = ctk.CTkFrame(new_window)
         tabla_frame.pack(pady=20)
 
         columns = ("Columna1", "Columna2", "Columna3", "Columna4")
-        tabla = ttk.Treeview(tabla_frame, columns=columns, show="headings")
+        
+        # Crea un LabelFrame para contener la tabla
+        tabla_container = tk.LabelFrame(tabla_frame)
+        tabla_container.pack()
+
+        # Crea el Treeview dentro de un LabelFrame
+        table_height = 25
+        tabla = ttk.Treeview(tabla_container, columns=columns, show="headings", height=table_height)
         tabla.heading("#1", text="No.")
         tabla.heading("#2", text="Codigo Empleado")
         tabla.heading("#3", text="Nombre")
@@ -140,9 +128,52 @@ class App():
 
         tabla.pack(pady=20)
 
-        # Start the main loop for the new window
+        # Inicia el bucle principal para la nueva ventana.
         new_window.mainloop()
 
+    def ventanaEmpleado(self): 
+        # Crear una nueva ventana
+        new_w = ctk.CTk()
+        new_w.geometry("300x200")
+        new_w.title("ProjectUp")
+
+        # Agregar contenido a la nueva ventana
+        #label = ctk.CTkLabel(new_w, text="Bienvenido a la nueva ventana")
+        #label.pack(pady=20)
+        ancho = new_w.winfo_screenwidth()
+        alto = new_w.winfo_screenheight()
+
+        ancho_ventana = 850
+        alto_ventana = 600
+        # Calcular la posición x e y para centrar la ventana
+        x = (ancho / 2) - (ancho_ventana / 2)
+        y = (alto / 2) - (alto_ventana / 2)
+        # Establecer la geometría de la ventana
+        new_w.geometry("%dx%d+%d+%d" % (ancho_ventana, alto_ventana, x, y))
+
+        # Iniciar el bucle de la nueva ventana
+        new_w.mainloop()
+
+    def login(self):
+        # Obtener las entradas del usuario y la contraseña desde los campos de entrada
+        username = self.user_entry.get()
+        password = self.user_pass.get()
+        print(username,password)
+
+        if tablaGlobal.buscarM(username, password):
+            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente")
+            self.app.withdraw() # cerrar la ventana actual
+            self.ventana2() # Abrir una nueva ventana
+        elif tablaGlobal.buscar(username, password):
+            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente.")
+            self.app.withdraw() # cerrar la ventana actual
+            self.ventanaEmpleado() # Abrir una nueva ventana
+        elif self.user_entry.get() == username and self.user_pass.get() != password:
+            tkmb.showwarning(title='Wrong password', message='Por favor revisa tu contraseña')
+        elif self.user_entry.get() != username and self.user_pass.get() == password:
+            tkmb.showwarning(title='Wrong username', message='Por favor revisa tu usuario')
+        else:
+            tkmb.showerror(title="Login Failed", message="Contraseña o usuario incorrectos")
 
     def ventanaJSON(self): 
         # Crear una nueva ventana
@@ -151,28 +182,16 @@ class App():
         new_.title("Nueva Ventana")
 
         # Agregar contenido a la nueva ventana
-        label = ctk.CTkLabel(new_w, text="Bienvenido a la nueva ventana")
+        label = ctk.CTkLabel(new_, text="Bienvenido a la nueva ventana")
         label.pack(pady=20)
 
         # Iniciar el bucle de la nueva ventana
         new_.mainloop()
 
 
-    def ventanaEmpleado(self): 
-        # Crear una nueva ventana
-        new_w = ctk.CTk()
-        new_w.geometry("300x200")
-        new_w.title("Nueva Ventana")
-
-        # Agregar contenido a la nueva ventana
-        label = ctk.CTkLabel(new_w, text="Bienvenido a la nueva ventana")
-        label.pack(pady=20)
-
-        # Iniciar el bucle de la nueva ventana
-        new_w.mainloop()
-
     def run(self):
         # Iniciar el bucle principal de la aplicación
+        tablaGlobal.Insertar("PM-202000558","DEFAULT","1","Project Manager") #AGREGA PM POR DEFECTO AL INICIAR EL PROGRAMA
         self.app.mainloop()
 
 
