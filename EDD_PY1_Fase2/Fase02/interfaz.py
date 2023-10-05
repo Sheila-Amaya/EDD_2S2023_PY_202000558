@@ -6,8 +6,12 @@ from tkinter import Text
 import csv
 import json
 from Estructuras.tablaHash import TablaHash
+from Estructuras.arbolAVL import *
+from Estructuras.arbolB import *
 
 tablaGlobal = TablaHash()
+proyectos = Arbol_AVL()
+tareas = ArbolB()
 
 class App():
     def __init__(self):
@@ -209,18 +213,21 @@ class App():
                 proyectos = datos.get("Proyectos", [])
                 contenido_json = ""
 
-                for proyecto in proyectos:
-                    contenido_json += "{}".format(proyecto.get("id", ""))
-                    contenido_json += "- {}".format(proyecto.get("nombre", ""))
-                    contenido_json += "- {}\n".format(proyecto.get("prioridad", ""))
+                for i, proyecto in enumerate(proyectos):
+                    contenido_json += "├── {} - {} - {}\n".format(proyecto.get("id", ""), proyecto.get("nombre", ""), proyecto.get("prioridad", ""))
                     
                     # Para procesar las tareas en cada proyecto
                     tareas = proyecto.get("tareas", [])
-                    for tarea in tareas:
-                        contenido_json += "\t {}\t".format(tarea.get("nombre", ""))
-                        contenido_json += "- {}\n".format(tarea.get("empleado", ""))
+                    for j, tarea in enumerate(tareas):
+                        if j == len(tareas) - 1:
+                            contenido_json += "│   └── {}\t- {}\n".format(tarea.get("nombre", ""), tarea.get("empleado", ""))
+                        else:
+                            contenido_json += "│   ├── {}\t- {}\n".format(tarea.get("nombre", ""), tarea.get("empleado", ""))
                     
-                    contenido_json += "\n"  # Imprime una línea en blanco para separar proyectos
+                    if i != len(proyectos) - 1:
+                        contenido_json += "│\n"
+                    else:
+                        contenido_json += "└──\n"  # Imprime una línea en blanco después del último proyecto
 
                 # Limpia el cuadro de texto antes de mostrar el contenido
                 self.cuadro_texto.delete(1.0, tk.END)
