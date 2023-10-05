@@ -2,7 +2,9 @@ import customtkinter as ctk
 import tkinter.messagebox as tkmb
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
+from tkinter import Text
 import csv
+import json
 from Estructuras.tablaHash import TablaHash
 
 tablaGlobal = TablaHash()
@@ -28,9 +30,9 @@ class App():
         self.app.title("PROJECT UP")
 
         # Crear elementos de la interfaz
-        self.create_ui()
+        self.ventana_inicio()
 
-    def create_ui(self):
+    def ventana_inicio(self):
         # Etiqueta principal
         label = ctk.CTkLabel(self.app, text=" BIENVENIDO ")
         label.pack(pady=10)
@@ -54,6 +56,28 @@ class App():
         button = ctk.CTkButton(master=frame, text='Login', command=self.login)
         button.pack(pady=12, padx=10)
 
+    def login(self):
+        # Obtener las entradas del usuario y la contraseña desde los campos de entrada
+        username = self.user_entry.get()
+        password = self.user_pass.get()
+        print(username,password)
+
+        if tablaGlobal.buscarM(username, password):
+            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente")
+            self.app.withdraw() # cerrar la ventana actual
+            self.ventana2() # Abrir una nueva ventana
+        elif tablaGlobal.buscar(username, password):
+            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente.")
+            self.app.withdraw() # cerrar la ventana actual
+            self.ventanaEmpleado() # Abrir una nueva ventana
+        elif self.user_entry.get() == username and self.user_pass.get() != password:
+            tkmb.showwarning(title='Wrong password', message='Por favor revisa tu contraseña')
+        elif self.user_entry.get() != username and self.user_pass.get() == password:
+            tkmb.showwarning(title='Wrong username', message='Por favor revisa tu usuario')
+        else:
+            tkmb.showerror(title="Login Failed", message="Contraseña o usuario incorrectos")
+
+
     def ventana2(self):
         # Create a new window
         new_window = ctk.CTk()
@@ -63,7 +87,7 @@ class App():
         alto = new_window.winfo_screenheight()
 
         ancho_ventana = 850
-        alto_ventana = 600
+        alto_ventana = 570
         # Calcular la posición x e y para centrar la ventana
         x = (ancho / 2) - (ancho_ventana / 2)
         y = (alto / 2) - (alto_ventana / 2)
@@ -91,16 +115,20 @@ class App():
                         tablaGlobal.Insertar(id, nombre, password, puesto)
                 AgregarTabla()
 
-        file_menu.add_command(label="Open CSV", command=open_csv)
-
-        # Add "Exit" menu item
+        # CERRAR SESION
         def cerrarSesion():
             new_window.destroy()
             nueva_app = App()  # Crea una nueva instancia de la aplicación
             nueva_app.run()  # Inicia la nueva aplicación
 
+        #botones menubar
+        file_menu.add_command(label="Cargar CSV", command=open_csv)
+        file_menu.add_separator()
+        file_menu.add_command(label="Json", command= self.ventanaJSON)
+        file_menu.add_separator()
         file_menu.add_command(label="Cerrar sesion", command=cerrarSesion)
 
+        #arma la tabla para mostrar tablaHash
         tabla_frame = ctk.CTkFrame(new_window)
         tabla_frame.pack(pady=20)
 
@@ -131,6 +159,75 @@ class App():
         # Inicia el bucle principal para la nueva ventana.
         new_window.mainloop()
 
+
+    def ventanaJSON(self): 
+        # Crear una nueva ventana
+        new_ = ctk.CTk()
+        new_.geometry("300x200")
+        new_.title("ProjectUp")
+
+        ancho = new_.winfo_screenwidth()
+        alto = new_.winfo_screenheight()
+
+        ancho_ventana = 850
+        alto_ventana = 600
+        # Calcular la posición x e y para centrar la ventana
+        x = (ancho / 2) - (ancho_ventana / 2)
+        y = (alto / 2) - (alto_ventana / 2)
+        # Establecer la geometría de la ventana
+        new_.geometry("%dx%d+%d+%d" % (ancho_ventana, alto_ventana, x, y))
+
+        # Crea a menu bar
+        menubar = tk.Menu(new_)
+        new_.config(menu=menubar)
+
+        # Crea "File" en el menubar
+        file_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="File", menu=file_menu)
+
+        # Botones menubar
+        file_menu.add_command(label="Cargar JSON", command=self.cargar_json)
+        file_menu.add_separator()
+        file_menu.add_command(label="Reporte Tareas")
+        file_menu.add_separator()
+        file_menu.add_command(label="Reporte Proyectos")
+
+        # Crear el cuadro de texto
+        self.cuadro_texto = Text(new_, height=30, width=95)
+        self.cuadro_texto.pack()
+        self.cuadro_texto.place(x=55, y=45)  # Ubicar el cuadro de texto en el centro
+
+        # Iniciar el bucle principal para la nueva ventana
+        new_.mainloop()
+
+    # FUNCION PARA PROCESAR EL JSON
+    def cargar_json(self):
+        ruta_archivo = filedialog.askopenfilename(filetypes=[("Archivos JSON", "*.json")])
+        if ruta_archivo:
+            with open(ruta_archivo, 'r', encoding='utf-8') as archivo_json:
+                datos = json.load(archivo_json)
+                proyectos = datos.get("Proyectos", [])
+                contenido_json = ""
+
+                for proyecto in proyectos:
+                    contenido_json += "{}".format(proyecto.get("id", ""))
+                    contenido_json += "- {}".format(proyecto.get("nombre", ""))
+                    contenido_json += "- {}\n".format(proyecto.get("prioridad", ""))
+                    
+                    # Para procesar las tareas en cada proyecto
+                    tareas = proyecto.get("tareas", [])
+                    for tarea in tareas:
+                        contenido_json += "\t {}\t".format(tarea.get("nombre", ""))
+                        contenido_json += "- {}\n".format(tarea.get("empleado", ""))
+                    
+                    contenido_json += "\n"  # Imprime una línea en blanco para separar proyectos
+
+                # Limpia el cuadro de texto antes de mostrar el contenido
+                self.cuadro_texto.delete(1.0, tk.END)
+                # Inserta el contenido del JSON procesado en el cuadro de texto
+                self.cuadro_texto.insert(tk.END, contenido_json)
+
+
     def ventanaEmpleado(self): 
         # Crear una nueva ventana
         new_w = ctk.CTk()
@@ -153,40 +250,6 @@ class App():
 
         # Iniciar el bucle de la nueva ventana
         new_w.mainloop()
-
-    def login(self):
-        # Obtener las entradas del usuario y la contraseña desde los campos de entrada
-        username = self.user_entry.get()
-        password = self.user_pass.get()
-        print(username,password)
-
-        if tablaGlobal.buscarM(username, password):
-            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente")
-            self.app.withdraw() # cerrar la ventana actual
-            self.ventana2() # Abrir una nueva ventana
-        elif tablaGlobal.buscar(username, password):
-            tkmb.showinfo(title="Login Successful", message="Has iniciado sesión correctamente.")
-            self.app.withdraw() # cerrar la ventana actual
-            self.ventanaEmpleado() # Abrir una nueva ventana
-        elif self.user_entry.get() == username and self.user_pass.get() != password:
-            tkmb.showwarning(title='Wrong password', message='Por favor revisa tu contraseña')
-        elif self.user_entry.get() != username and self.user_pass.get() == password:
-            tkmb.showwarning(title='Wrong username', message='Por favor revisa tu usuario')
-        else:
-            tkmb.showerror(title="Login Failed", message="Contraseña o usuario incorrectos")
-
-    def ventanaJSON(self): 
-        # Crear una nueva ventana
-        new_= ctk.CTk()
-        new_.geometry("300x200")
-        new_.title("Nueva Ventana")
-
-        # Agregar contenido a la nueva ventana
-        label = ctk.CTkLabel(new_, text="Bienvenido a la nueva ventana")
-        label.pack(pady=20)
-
-        # Iniciar el bucle de la nueva ventana
-        new_.mainloop()
 
 
     def run(self):
