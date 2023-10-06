@@ -8,10 +8,12 @@ import json
 from Estructuras.tablaHash import TablaHash
 from Estructuras.arbolAVL import *
 from Estructuras.arbolB import *
+from proyecto import Proyecto
+from tarea import Tarea
 
 tablaGlobal = TablaHash()
-proyectos = Arbol_AVL()
-tareas = ArbolB()
+proyectosReporte = Arbol_AVL()
+tareasReporte = ArbolB()
 
 class App():
     def __init__(self):
@@ -192,9 +194,9 @@ class App():
         # Botones menubar
         file_menu.add_command(label="Cargar JSON", command=self.cargar_json)
         file_menu.add_separator()
-        file_menu.add_command(label="Reporte Tareas")
+        file_menu.add_command(label="Reporte Tareas", command=self.ReporteTareas)
         file_menu.add_separator()
-        file_menu.add_command(label="Reporte Proyectos")
+        file_menu.add_command(label="Reporte Proyectos" , command=self.ReporteProyecto)
 
         # Crear el cuadro de texto
         self.cuadro_texto = Text(new_, height=30, width=95)
@@ -204,7 +206,6 @@ class App():
         # Iniciar el bucle principal para la nueva ventana
         new_.mainloop()
 
-    # FUNCION PARA PROCESAR EL JSON
     def cargar_json(self):
         ruta_archivo = filedialog.askopenfilename(filetypes=[("Archivos JSON", "*.json")])
         if ruta_archivo:
@@ -214,16 +215,37 @@ class App():
                 contenido_json = ""
 
                 for i, proyecto in enumerate(proyectos):
+                    id_proyecto = proyecto.get("id", "")
                     contenido_json += "├── {} - {} - {}\n".format(proyecto.get("id", ""), proyecto.get("nombre", ""), proyecto.get("prioridad", ""))
+                    cod_proyecto = proyecto.get("id", "")
+                    nombre_proyecto = proyecto.get("nombre", "")
+                    prioridad = proyecto.get("prioridad", "")
                     
                     # Para procesar las tareas en cada proyecto
                     tareas = proyecto.get("tareas", [])
+                    contador = 0
+
                     for j, tarea in enumerate(tareas):
                         if j == len(tareas) - 1:
                             contenido_json += "│   └── {}\t- {}\n".format(tarea.get("nombre", ""), tarea.get("empleado", ""))
                         else:
                             contenido_json += "│   ├── {}\t- {}\n".format(tarea.get("nombre", ""), tarea.get("empleado", ""))
-                    
+
+                        contador += 1  # Incrementa el contador
+
+                        # Almacenar los nombres y empleados de las tareas en variables
+                        nombre_tarea = tarea.get("nombre", "")
+                        empleado_tarea = tarea.get("empleado", "")
+                        id_tarea = "T" + str(contador) + "-" + id_proyecto
+
+                        tarea_ = Tarea(id_tarea, nombre_tarea, empleado_tarea)
+                        tareasReporte.insertar(tarea_)  # Agregar tarea al árbol B
+                        # También puedes imprimir la tarea para verificar
+                        # print(tarea_)
+
+                    pro = Proyecto(cod_proyecto, nombre_proyecto, tarea_, prioridad)  # PARA EL FILTRADO 
+                    proyectosReporte.Insertar(cod_proyecto)  # Agregar proyecto al árbol AVL
+
                     if i != len(proyectos) - 1:
                         contenido_json += "│\n"
                     else:
@@ -234,6 +256,12 @@ class App():
                 # Inserta el contenido del JSON procesado en el cuadro de texto
                 self.cuadro_texto.insert(tk.END, contenido_json)
 
+
+    def ReporteTareas(self):
+        tareasReporte.graficar()
+
+    def ReporteProyecto(self):
+        proyectosReporte.graficar()
 
     def ventanaEmpleado(self): 
         # Crear una nueva ventana

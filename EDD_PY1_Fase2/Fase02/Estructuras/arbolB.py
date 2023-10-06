@@ -1,5 +1,5 @@
-from nodoB import NodoB
-from ramaB import RamaB
+from Estructuras.nodoB import NodoB
+from Estructuras.ramaB import RamaB
 import os #graphviz
 
 
@@ -9,7 +9,7 @@ class ArbolB():
         self.raiz: RamaB = None
 
     def insertar(self, valor):
-        numero = self.suma_ascii(valor)
+        numero = self.suma_ascii(valor.idTarea)
         nuevo = NodoB(numero, valor)
         if self.raiz is None:
             self.raiz = RamaB()
@@ -101,7 +101,7 @@ class ArbolB():
     def graficar(self):
         cadena = ''
         archivo = "arbolB.jpg"
-        a = open("arbolB.dot","w")
+        a = open("arbolB.dot","w",encoding="utf-8")
         if self.raiz is not None:
             cadena += "digraph arbol { \nnode[shape=record]"
             cadena += self.Grafo(self.raiz.primero)
@@ -136,9 +136,9 @@ class ArbolB():
                     dot = dot + "<C" + str(r) + ">|"
                     r += 1
                 if aux.siguiente is not None:
-                    dot = dot + str(aux.id) + "|" #Cambio de valores
+                    dot = dot + str(aux.id.idTarea) + "\\n" + str(aux.id.nombreTarea) + "|" #Cambio de valores
                 else:
-                    dot = dot + str(aux.id) #cambio de Valores
+                    dot = dot + str(aux.id.idTarea) + "\\n" + str(aux.id.nombreTarea) #cambio de Valores
                     if aux.derecha is not None:
                         dot = dot + "|<C" + str(r) + ">"
                 aux = aux.siguiente
@@ -163,7 +163,3 @@ class ArbolB():
                         dot += self.conexionRamas(aux.derecha.primero)
                 aux = aux.siguiente
         return dot
-    
-#arbol = ArbolB()
-#arbol.insertar('T1-PY-100')
-#arbol.graficar() 
