@@ -99,51 +99,62 @@ class ArbolB():
     
     #Reporte de Graphiz
     def graficar(self):
+        # Nombre del archivo y ruta para el DOT y la imagen
+        dot_file_path = os.path.join("Reportes", "arbolB.dot")
+        image_file_path = os.path.join("Reportes", "arbolB.jpg")
+
+        # Asegúrate de que la carpeta "Reportes" exista
+        if not os.path.exists("Reportes"):
+            os.makedirs("Reportes")
+
         cadena = ''
-        archivo = "arbolB.jpg"
-        a = open("arbolB.dot","w",encoding="utf-8")
+        a = open(dot_file_path, "w", encoding="utf-8")
         if self.raiz is not None:
             cadena += "digraph arbol { \nnode[shape=record]"
-            cadena += self.Grafo(self.raiz.primero)
+            cadena += self.Grafo(self.raiz.primero, nivel=0)  # Pasa el nivel inicial
             cadena += self.conexionRamas(self.raiz.primero)
             cadena += "}"
         a.write(cadena)
         a.close()
-        os.system("dot -Tjpg arbolB.dot -o " + archivo)
-    
-    def Grafo(self, rama:NodoB):
+        
+        # Genera la imagen desde el archivo DOT
+        os.system(f"dot -Tjpg {dot_file_path} -o {image_file_path}")
+
+    def Grafo(self, rama: NodoB, nivel):  # Recibe el nivel como argumento
         dot = ''
         if rama is not None:
-            dot += self.GrafoRamas(rama)
-            aux:NodoB = rama
+            dot += self.GrafoRamas(rama, nivel)
+            aux: NodoB = rama
             while aux is not None:
                 if aux.izquierda is not None:
-                    dot += self.Grafo(aux.izquierda.primero)
+                    dot += self.Grafo(aux.izquierda.primero, nivel + 1)  # Incrementa el nivel
                 if aux.siguiente is None:
                     if aux.derecha is not None:
-                        dot += self.Grafo(aux.derecha.primero)
+                        dot += self.Grafo(aux.derecha.primero, nivel + 1)  # Incrementa el nivel
                 aux = aux.siguiente
         return dot
 
-    def GrafoRamas(self, rama:NodoB):
+    def GrafoRamas(self, rama: NodoB, nivel):  # Recibe el nivel como argumento
         dot = ''
         if rama is not None:
-            aux:NodoB = rama
-            dot = dot + "R" + str(rama.valor) + "[label=\"" #rama.valor.Tarea.codigo_tarea || rama.valor.codigo_tarea
-            r = 1 
+            aux: NodoB = rama
+            dot = dot + "R" + str(rama.valor) + "[label=\""  # rama.valor.Tarea.codigo_tarea || rama.valor.codigo_tarea
+            r = 1
             while aux is not None:
                 if aux.izquierda is not None:
                     dot = dot + "<C" + str(r) + ">|"
                     r += 1
                 if aux.siguiente is not None:
-                    dot = dot + str(aux.id.idTarea) + "\\n" + str(aux.id.nombreTarea) + "|" #Cambio de valores
+                    dot = dot + str(aux.id.idTarea) + "\\n" + str(aux.id.nombreTarea) + "\\n" + "Nivel: " + str(nivel)  + "|"  # Cambio de valores
                 else:
-                    dot = dot + str(aux.id.idTarea) + "\\n" + str(aux.id.nombreTarea) #cambio de Valores
+                    dot = dot + str(aux.id.idTarea) + "\\n" + str(
+                        aux.id.nombreTarea) + "\\n" + "Nivel: " + str(nivel)   # cambio de Valores
                     if aux.derecha is not None:
                         dot = dot + "|<C" + str(r) + ">"
                 aux = aux.siguiente
             dot = dot + "\"];\n"
         return dot
+
     
     def conexionRamas(self, rama:NodoB):
         dot = ''

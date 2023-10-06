@@ -93,17 +93,25 @@ class Arbol_AVL():
             print(raiz.valor, end=' ')
 
     def graficar(self):
+        # Nombre del archivo y ruta para el DOT y la imagen
+        dot_file_path = os.path.join("Reportes", "arbolAVL.dot")
+        image_file_path = os.path.join("Reportes", "arbolAVL.jpg")
+
+        # Asegúrate de que la carpeta "Reportes" exista
+        if not os.path.exists("Reportes"):
+            os.makedirs("Reportes")
+
         cadena = ''
-        archivo = "arbolAVL.jpg"
-        a = open("arbolAVL.dot","w")
+        a = open(dot_file_path, "w")
         if self.raiz is not None:
             cadena += "digraph arbol {"
             cadena += self.retornarValoresArbol(self.raiz, 0)
             cadena += "}"
         a.write(cadena)
         a.close()
-        os.system("dot -Tjpg arbolAVL.dot -o " + archivo)
-        #os.system(archivo)
+        
+        # Genera la imagen desde el archivo DOT
+        os.system(f"dot -Tjpg {dot_file_path} -o {image_file_path}")
 
 
     def retornarValoresArbol(self, raiz, id):
