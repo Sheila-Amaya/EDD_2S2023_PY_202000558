@@ -8,15 +8,19 @@ import json
 from Estructuras.tablaHash import TablaHash
 from Estructuras.arbolAVL import *
 from Estructuras.arbolB import *
+from Estructuras.listaSimple import *
 from proyecto import Proyecto
 from tarea import Tarea
 
 tablaGlobal = TablaHash()
 proyectosReporte = Arbol_AVL()
 tareasReporte = ArbolB()
+listaProyectos = EnlazadaSimple()
+listaTareas = EnlazadaSimple()
 
 class App():
     def __init__(self):
+        self.username = None
         # Configurar la apariencia y el color de la interfaz
         ctk.set_appearance_mode("System")
         ctk.set_default_color_theme("green")
@@ -66,6 +70,7 @@ class App():
         # Obtener las entradas del usuario y la contraseña desde los campos de entrada
         username = self.user_entry.get()
         password = self.user_pass.get()
+        self.username = username
         print(username,password)
 
         if tablaGlobal.buscarM(username, password):
@@ -82,7 +87,6 @@ class App():
             tkmb.showwarning(title='Wrong username', message='Por favor revisa tu usuario')
         else:
             tkmb.showerror(title="Login Failed", message="Contraseña o usuario incorrectos")
-
 
     def ventana2(self):
         # Create a new window
@@ -165,7 +169,6 @@ class App():
         # Inicia el bucle principal para la nueva ventana.
         new_window.mainloop()
 
-
     def ventanaJSON(self): 
         # Crear una nueva ventana
         new_ = ctk.CTk()
@@ -239,12 +242,13 @@ class App():
                         id_tarea = "T" + str(contador) + "-" + id_proyecto
 
                         tarea_ = Tarea(id_tarea, nombre_tarea, empleado_tarea,nombre_proyecto)
+                        listaTareas.Insertar(tarea_) #lista simple dentro del objeto Proyecto 
                         tareasReporte.insertar(tarea_)  # Agregar tarea al árbol B
-                        # También puedes imprimir la tarea para verificar
-                        # print(tarea_)
 
-                    pro = Proyecto(cod_proyecto, nombre_proyecto, tarea_, prioridad)  # PARA EL FILTRADO 
+                        # print(tarea_)
                     proyectosReporte.Insertar(cod_proyecto)  # Agregar proyecto al árbol AVL
+                    datos = Proyecto(cod_proyecto, nombre_proyecto, tarea_, prioridad)  # PARA EL FILTRADO 
+                    listaProyectos.Insertar(datos)
 
                     if i != len(proyectos) - 1:
                         contenido_json += "│\n"
@@ -256,12 +260,12 @@ class App():
                 # Inserta el contenido del JSON procesado en el cuadro de texto
                 self.cuadro_texto.insert(tk.END, contenido_json)
 
-
     def ReporteTareas(self):
         tareasReporte.graficar()
 
     def ReporteProyecto(self):
         proyectosReporte.graficar()
+
 
     def ventanaEmpleado(self): 
         # Crear una nueva ventana
@@ -270,8 +274,9 @@ class App():
         new_w.title("ProjectUp")
 
         # Agregar contenido a la nueva ventana
-        #label = ctk.CTkLabel(new_w, text="Bienvenido a la nueva ventana")
-        #label.pack(pady=20)
+        label = ctk.CTkLabel(new_w, text="{}".format(self.username))
+        label.place(x=50, y=50)
+
         ancho = new_w.winfo_screenwidth()
         alto = new_w.winfo_screenheight()
 
@@ -283,9 +288,42 @@ class App():
         # Establecer la geometría de la ventana
         new_w.geometry("%dx%d+%d+%d" % (ancho_ventana, alto_ventana, x, y))
 
+        # Crear un ttk.Combobox para el nombre del proyecto obtenido de la función buscar
+        combobox = ttk.Combobox(new_w)
+        
+        # Obtener el nodo del usuario usando la función buscar
+        nodo_usuario = listaProyectos.buscar(self.username)
+        print(nodo_usuario)
+        listaProyectos.recorrer()
+        if nodo_usuario is not None:
+            nombre_proyecto = nodo_usuario.idProyecto
+            combobox.set(nombre_proyecto)
+        
+        combobox.place(x=80, y=150)  # Ajusta las coordenadas 
+
+        # Crear un LabelFrame para contener la tabla
+        tabla_container = tk.LabelFrame(new_w)
+        tabla_container.place(x=80, y=200, width=900)  # Ajusta las coordenadas 
+
+        columns = ("Columna1", "Columna2", "Columna3")
+        # Crea el Treeview dentro de un LabelFrame
+        table_height = 20
+        tabla = ttk.Treeview(tabla_container, columns=columns, show="headings", height=table_height)
+        tabla.heading("#1", text="Codigo Tarea")
+        tabla.heading("#2", text="Nombre Proyecto")
+        tabla.heading("#3", text="Nombre Tarea")
+
+        # Recorrer la lista de tareas y agregar las filas a la tabla
+        for tarea in listaTareas:
+            if tarea.codigoEmpleado == self.username:  
+                tabla.insert("", "end", values=(tarea.idTarea, tarea.nombreProyecto, tarea.nombreTarea))
+
+
+        # Colocar la tabla en el LabelFrame
+        tabla.pack(fill=tk.BOTH, expand=True, pady=20)
+
         # Iniciar el bucle de la nueva ventana
         new_w.mainloop()
-
 
     def run(self):
         # Iniciar el bucle principal de la aplicación
