@@ -111,7 +111,7 @@ class ArbolB():
         a = open(dot_file_path, "w", encoding="utf-8")
         if self.raiz is not None:
             cadena += "digraph arbol { \nnode[shape=record]"
-            cadena += self.Grafo(self.raiz.primero, nivel=0)  # Pasa el nivel inicial
+            cadena += self.Grafo(self.raiz.primero) 
             cadena += self.conexionRamas(self.raiz.primero)
             cadena += "}"
         a.write(cadena)
@@ -120,21 +120,21 @@ class ArbolB():
         # Genera la imagen desde el archivo DOT
         os.system(f"dot -Tjpg {dot_file_path} -o {image_file_path}")
 
-    def Grafo(self, rama: NodoB, nivel):  # Recibe el nivel como argumento
+    def Grafo(self, rama: NodoB): 
         dot = ''
         if rama is not None:
-            dot += self.GrafoRamas(rama, nivel)
+            dot += self.GrafoRamas(rama)
             aux: NodoB = rama
             while aux is not None:
                 if aux.izquierda is not None:
-                    dot += self.Grafo(aux.izquierda.primero, nivel + 1)  # Incrementa el nivel
+                    dot += self.Grafo(aux.izquierda.primero) 
                 if aux.siguiente is None:
                     if aux.derecha is not None:
-                        dot += self.Grafo(aux.derecha.primero, nivel + 1)  # Incrementa el nivel
+                        dot += self.Grafo(aux.derecha.primero) 
                 aux = aux.siguiente
         return dot
 
-    def GrafoRamas(self, rama: NodoB, nivel):  # Recibe el nivel como argumento
+    def GrafoRamas(self, rama: NodoB): 
         dot = ''
         if rama is not None:
             aux: NodoB = rama
@@ -145,10 +145,10 @@ class ArbolB():
                     dot = dot + "<C" + str(r) + ">|"
                     r += 1
                 if aux.siguiente is not None:
-                    dot = dot + str(aux.id.idTarea) + "\\n" + str(aux.id.nombreTarea) + "\\n" + "Nivel: " + str(nivel)  + "|"  # Cambio de valores
+                    dot = dot + str(aux.id.idTarea) + "\\n" + str(aux.id.nombreTarea) + "\\n" + str(aux.id.nombreProyecto) + "|"  # Cambio de valores
                 else:
                     dot = dot + str(aux.id.idTarea) + "\\n" + str(
-                        aux.id.nombreTarea) + "\\n" + "Nivel: " + str(nivel)   # cambio de Valores
+                        aux.id.nombreTarea) + "\\n" + str(aux.id.nombreProyecto)  # cambio de Valores
                     if aux.derecha is not None:
                         dot = dot + "|<C" + str(r) + ">"
                 aux = aux.siguiente

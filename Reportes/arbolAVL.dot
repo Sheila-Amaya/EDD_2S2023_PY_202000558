@@ -1,4 +1,4 @@
-digraph arbol {"PY-103" ;
+digraph arbol {node [shape=box];"PY-103" ;
 x1 [label="",width=.1,style=invis];
 "PY-103" -> "PY-101" ;
 x2 [label="",width=.1,style=invis];

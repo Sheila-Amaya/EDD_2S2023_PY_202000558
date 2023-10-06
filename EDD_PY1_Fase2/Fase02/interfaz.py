@@ -238,7 +238,7 @@ class App():
                         empleado_tarea = tarea.get("empleado", "")
                         id_tarea = "T" + str(contador) + "-" + id_proyecto
 
-                        tarea_ = Tarea(id_tarea, nombre_tarea, empleado_tarea)
+                        tarea_ = Tarea(id_tarea, nombre_tarea, empleado_tarea,nombre_proyecto)
                         tareasReporte.insertar(tarea_)  # Agregar tarea al árbol B
                         # También puedes imprimir la tarea para verificar
                         # print(tarea_)

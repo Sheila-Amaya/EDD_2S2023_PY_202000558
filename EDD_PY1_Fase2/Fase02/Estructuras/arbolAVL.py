@@ -105,6 +105,7 @@ class Arbol_AVL():
         a = open(dot_file_path, "w")
         if self.raiz is not None:
             cadena += "digraph arbol {"
+            cadena += 'node [shape=box];'
             cadena += self.retornarValoresArbol(self.raiz, 0)
             cadena += "}"
         a.write(cadena)
