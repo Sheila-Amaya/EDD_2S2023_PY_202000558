@@ -33,7 +33,7 @@ class EnlazadaSimple:
             if  temp.dato.tareas.codigoEmpleado.lower() == nombre.lower():
                 return temp.dato  # Devuelve el nodo si se encuentra 
             temp = temp.siguiente
-        return None  # Devuelve None si no se encuentra el correo
+        return None  # Devuelve None si no se encuentra 
     
     def buscarProyecto(self, nombre):
         temp = self.primero

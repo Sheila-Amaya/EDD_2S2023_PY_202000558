@@ -274,8 +274,8 @@ class App():
         new_w.title("ProjectUp")
 
         # Agregar contenido a la nueva ventana
-        label = ctk.CTkLabel(new_w, text="{}".format(self.username))
-        label.place(x=50, y=50)
+        label = ctk.CTkLabel(new_w, text="Bienvenido, {}".format(self.username))
+        label.place(x=650, y=50)
 
         ancho = new_w.winfo_screenwidth()
         alto = new_w.winfo_screenheight()
