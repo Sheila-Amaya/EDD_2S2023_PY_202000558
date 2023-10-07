@@ -22,7 +22,9 @@ class EnlazadaSimple:
             print(temp.dato.idProyecto)
             print(temp.dato.nombreProyecto)
             print(temp.dato.tareas.idTarea)
+            print(temp.dato.tareas.nombreTarea)
             print(temp.dato.tareas.codigoEmpleado)
+            print(temp.dato.tareas.nombreProyecto)
             print()
             temp = temp.siguiente
 

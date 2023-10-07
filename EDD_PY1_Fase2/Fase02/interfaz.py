@@ -266,7 +266,6 @@ class App():
     def ReporteProyecto(self):
         proyectosReporte.graficar()
 
-
     def ventanaEmpleado(self): 
         # Crear una nueva ventana
         new_w = ctk.CTk()
@@ -276,6 +275,12 @@ class App():
         # Agregar contenido a la nueva ventana
         label = ctk.CTkLabel(new_w, text="Bienvenido, {}".format(self.username))
         label.place(x=650, y=50)
+
+        # regresar login
+        def cerrarSesion():
+            new_w.destroy()
+            nueva_app = App()  # Crea una nueva instancia de la aplicación
+            nueva_app.run()  # Inicia la nueva aplicación
 
         ancho = new_w.winfo_screenwidth()
         alto = new_w.winfo_screenheight()
@@ -288,6 +293,11 @@ class App():
         # Establecer la geometría de la ventana
         new_w.geometry("%dx%d+%d+%d" % (ancho_ventana, alto_ventana, x, y))
 
+        #boton para regresar
+        return_button = ctk.CTkButton(new_w, text="Regresar al Login", command=cerrarSesion)
+        return_button.place(x=625, y=520)  # Adjust the button position as needed
+
+
         # Crear un ttk.Combobox para el nombre del proyecto obtenido de la función buscar
         combobox = ttk.Combobox(new_w)
         
@@ -299,11 +309,11 @@ class App():
             nombre_proyecto = nodo_usuario.idProyecto
             combobox.set(nombre_proyecto)
         
-        combobox.place(x=80, y=150)  # Ajusta las coordenadas 
+        combobox.place(x=80, y=100)  # Ajusta las coordenadas 
 
         # Crear un LabelFrame para contener la tabla
         tabla_container = tk.LabelFrame(new_w)
-        tabla_container.place(x=80, y=200, width=900)  # Ajusta las coordenadas 
+        tabla_container.place(x=80, y=150, width=900)  # Ajusta las coordenadas 
 
         columns = ("Columna1", "Columna2", "Columna3")
         # Crea el Treeview dentro de un LabelFrame
