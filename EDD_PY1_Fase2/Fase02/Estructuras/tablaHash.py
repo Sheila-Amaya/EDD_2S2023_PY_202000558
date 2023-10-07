@@ -44,7 +44,7 @@ class TablaHash():
 
     def nuevaCapacidad(self): #fibonacci
         cont = 0
-        a, b = 0, 1 #0, 1, 1, 2, 3, 5, 8, 13, 21, 34....
+        a, b = 5, 8 
         while cont < 15:
             cont += 1
             if a > self.capacidad:
