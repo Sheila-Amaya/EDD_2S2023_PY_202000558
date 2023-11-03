@@ -1,41 +1,29 @@
 from Estructuras.nodoSimple import *
 
 class EnlazadaSimple:
-    
-    def __init__(self):
+
+    def _init_(self):
         self.primero = None
         self.ultimo = None
-    
-    def estaVacia(self): #Si la lista esta vacia
-        return self.primero == None #si no he agregado nada
-    
-    def Insertar(self,dato):
-        if self.estaVacia():
-            self.primero = self.ultimo = Nodo(dato)
-        else:
-            temp = self.ultimo #guarda el dato en una variable temporal
-            self.ultimo = temp.siguiente = Nodo(dato)
 
-    def recorrer(self):
-        temp = self.primero
-        while temp != None:
-            print(temp.dato.idProyecto)
-            print(temp.dato.nombreProyecto)
-            print(temp.dato.tareas.idTarea)
-            print(temp.dato.tareas.nombreTarea)
-            print(temp.dato.tareas.codigoEmpleado)
-            print(temp.dato.tareas.nombreProyecto)
-            print()
-            temp = temp.siguiente
+    def vacia(self):
+        return self.primero == None
 
-    def buscar(self, nombre):
-        #
-        temp = self.primero
-        while temp:
-            if  temp.dato.tareas.codigoEmpleado.lower() == nombre.lower():
-                return temp.dato  # Devuelve el nodo si se encuentra 
-            temp = temp.siguiente
-        return None  # Devuelve None si no se encuentra 
+    def insertar_inicio(self, data):
+        nuevo_nodo = Nodo(data)  # Crea un nuevo nodo
+
+        if self.vacia():  # Si la lista está vacía, establece el nuevo nodo como primero y último
+            self.primero = self.ultimo = nuevo_nodo
+        else:  # Si la lista no está vacía, enlaza el nuevo nodo al antiguo primero y actualiza el primero
+            nuevo_nodo.siguiente = self.primero
+            self.primero = nuevo_nodo
+            
+    def recorrerLista(self):
+        aux = self.primero
+
+        while aux is not None:
+            print(aux.data)
+            aux = aux.siguiente
     
     def buscarProyecto(self, nombre):
         temp = self.primero

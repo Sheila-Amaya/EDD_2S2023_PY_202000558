@@ -1,6 +1,4 @@
 
-
-
 class Empleado:
     def __init__(self,idEmpleado,nombre,password,puesto):
         self.idEmpleado = idEmpleado

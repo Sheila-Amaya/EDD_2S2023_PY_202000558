@@ -1,4 +1,5 @@
 from Estructuras.nodoHash import NodoHash
+from Estructuras.hash import *
 
 class TablaHash():
     def __init__(self) -> None:
@@ -81,7 +82,7 @@ class TablaHash():
                         nuevo_indice = self.reCalculoIndice(codigo, contador)
                         if nuevo_indice in self.tabla:
                             empleado = self.tabla[nuevo_indice]
-                            if empleado.codigo == codigo and empleado.password == password:
+                            if empleado.codigo == codigo and hashPassword(empleado.password) == hashPassword(password): #Encriptacion password
                                 return True
                         else:
                             return False

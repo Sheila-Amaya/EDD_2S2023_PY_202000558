@@ -11,12 +11,16 @@ from Estructuras.arbolB import *
 from Estructuras.listaSimple import *
 from proyecto import Proyecto
 from tarea import Tarea
+from Estructuras.hash import *
+from Estructuras.grafo import *
 
 tablaGlobal = TablaHash()
 proyectosReporte = Arbol_AVL()
 tareasReporte = ArbolB()
 listaProyectos = EnlazadaSimple()
 listaTareas = EnlazadaSimple()
+grafoGeneral = Grafo()
+
 
 class App():
     def __init__(self):
@@ -88,7 +92,7 @@ class App():
         else:
             tkmb.showerror(title="Login Failed", message="Contraseña o usuario incorrectos")
 
-    def ventana2(self):
+    def ventana2(self): #VENTANA ADMI
         # Create a new window
         new_window = ctk.CTk()
         new_window.title("administrador")
@@ -125,14 +129,51 @@ class App():
                         tablaGlobal.Insertar(id, nombre, password, puesto)
                 AgregarTabla()
 
+        # ===================================CARGA ARCHIVOS Y REPORTES ===================================
+        def cargar_json_tareas():
+            ruta_archivo = filedialog.askopenfilename(filetypes=[("Archivos JSON", "*.json")])
+            if ruta_archivo:
+                with open(ruta_archivo, 'r', encoding='utf-8') as archivo_json:
+                    datos = json.load(archivo_json)
+                    
+                    for i in range(len(datos['Tareas'])):
+                        grafoGeneral.insertarFila(datos['Tareas'][i]['codigo'])
+                        if len(datos['Tareas'][i]['antecesor']) > 0:
+                            for j in range(len(datos['Tareas'][i]['antecesor'])):
+                                grafoGeneral.agregarNodo(
+                                    datos['Tareas'][i]['codigo'], datos['Tareas'][i]['antecesor'][j]['codigo'])
+
+        def ReporteGrafo(): #TAREAS
+            grafoGeneral.Grafico()
+
+        def cargar_json_proyecto():
+            pass
+
+        def ReporteProyecto(self): #PROYECTOS fase03
+            pass
+
+        def cargar_json_ewallet(): #fase03
+            pass
+
+
         # CERRAR SESION
         def cerrarSesion():
             new_window.destroy()
             nueva_app = App()  # Crea una nueva instancia de la aplicación
             nueva_app.run()  # Inicia la nueva aplicación
 
-        #botones menubar
+        #botones menubar ============ADMI=========================
         file_menu.add_command(label="Cargar CSV", command=open_csv)
+        file_menu.add_separator()
+        file_menu.add_command(label="Cargar tareas", command=cargar_json_tareas)    #grafo
+        file_menu.add_separator()
+        file_menu.add_command(label="Reporte Grafo", command=ReporteGrafo)          #grafo ReporteGrafo
+        file_menu.add_separator()
+        file_menu.add_command(label="Cargar Proyectos", command=cargar_json_proyecto)    
+        file_menu.add_separator()
+        file_menu.add_command(label="Reporte proyectos", command=ReporteProyecto)          
+        file_menu.add_separator()
+        file_menu.add_command(label="Cargar ewallet", command=cargar_json_ewallet)    
         file_menu.add_separator()
         file_menu.add_command(label="Json", command= self.ventanaJSON)
         file_menu.add_separator()
@@ -142,7 +183,7 @@ class App():
         tabla_frame = ctk.CTkFrame(new_window)
         tabla_frame.pack(pady=20)
 
-        columns = ("Columna1", "Columna2", "Columna3", "Columna4")
+        columns = ("Columna1", "Columna2", "Columna3", "Columna4", "Columna5")
         
         # Crea un LabelFrame para contener la tabla
         tabla_container = tk.LabelFrame(tabla_frame)
@@ -155,11 +196,12 @@ class App():
         tabla.heading("#2", text="Codigo Empleado")
         tabla.heading("#3", text="Nombre")
         tabla.heading("#4", text="Puesto")
+        tabla.heading("#5", text="Contraseña")
 
         def AgregarTabla():
             tabla.delete(*tabla.get_children())
             for clave, valor in tablaGlobal.tabla.items():
-                tabla.insert("", "end", values=(clave, valor.codigo, valor.nombre, valor.puesto))
+                tabla.insert("", "end", values=(clave, valor.codigo, valor.nombre, valor.puesto,hashPassword(valor.password)))
 
         if tablaGlobal.utilizacion > 0:
             AgregarTabla()
@@ -242,13 +284,13 @@ class App():
                         id_tarea = "T" + str(contador) + "-" + id_proyecto
 
                         tarea_ = Tarea(id_tarea, nombre_tarea, empleado_tarea,nombre_proyecto)
-                        listaTareas.Insertar(tarea_) #lista simple dentro del objeto Proyecto 
                         tareasReporte.insertar(tarea_)  # Agregar tarea al árbol B
+                        #listaTareas.Insertar(tarea_) #lista simple dentro del objeto Proyecto 
 
                         # print(tarea_)
                     proyectosReporte.Insertar(cod_proyecto)  # Agregar proyecto al árbol AVL
                     datos = Proyecto(cod_proyecto, nombre_proyecto, tarea_, prioridad)  # PARA EL FILTRADO 
-                    listaProyectos.Insertar(datos)
+                    #listaProyectos.Insertar(datos)
 
                     if i != len(proyectos) - 1:
                         contenido_json += "│\n"
@@ -280,7 +322,7 @@ class App():
         def cerrarSesion():
             new_w.destroy()
             nueva_app = App()  # Crea una nueva instancia de la aplicación
-            nueva_app.run()  # Inicia la nueva aplicación
+            nueva_app.run()    # Inicia la nueva aplicación
 
         ancho = new_w.winfo_screenwidth()
         alto = new_w.winfo_screenheight()

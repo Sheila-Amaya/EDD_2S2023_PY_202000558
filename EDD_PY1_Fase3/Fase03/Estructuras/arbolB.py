@@ -92,10 +92,6 @@ class ArbolB():
                 # Recorre la rama izquierda
                 if nodo.izquierda is not None:
                     recorrer_aux(nodo.izquierda.primero)
-
-                # Realiza una acción en el nodo actual
-                #print(f"Valor: {nodo.valor}, ID: {nodo.id.getCodigoTarea()}, {nodo.id.getNombre()}, {nodo.id.getCodigoEncargado()}, {nodo.id.getCodigoProyecto()}, {nodo.id.getNombreProyecto()}")
-                
                 listaTemporal.append(nodo.id)
 
                 # Recorre la rama derecha
@@ -106,13 +102,14 @@ class ArbolB():
                 if nodo.siguiente is not None:
                     recorrer_aux(nodo.siguiente)
 
-        # Llamar a la función auxiliar para iniciar el recorrido
+        # Llamar a la función auxiliar para el recorrido
         if nodo is None:
             nodo = self.raiz.primero
         recorrer_aux(nodo)
 
         # Devolver la lista temporal después de que se complete el recorrido
         return listaTemporal
+
 
     '''
     Nueva Funcion Implementada
