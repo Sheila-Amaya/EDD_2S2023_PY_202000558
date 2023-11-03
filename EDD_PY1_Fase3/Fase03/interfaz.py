@@ -112,7 +112,7 @@ class App():
         file_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="File", menu=file_menu)
 
-        # "Open CSV" 
+        # "Open CSV EMPLEADOS" 
         def open_csv():
             ruta_archivo = filedialog.askopenfilename(filetypes=[("Archivos CSV", "*.csv")])
             if ruta_archivo:
