@@ -1,19 +1,23 @@
 class Nodo():
-    def _init_(self, data):
-        self.data = data 
+    def __init__(self, dato):
+        self.dato = dato 
         self.siguiente = None
 
     def getIdTarea(self):
-        return self.data.getIdTarea() if self.data else None
+        return self.dato.getIdTarea() if self.dato else None
 
     def getIdProyecto(self):
-        return self.data.getIdProyecto() if self.data else None
+        return self.dato.getIdProyecto() if self.dato else None
 
     def getNombreTarea(self):
-        return self.data.getNombreTarea() if self.data else None
+        return self.dato.getNombreTarea() if self.dato else None
 
     def getCodigoEncargado(self):
-        return self.data.getCodigoEncargado() if self.data else None
+        return self.dato.getCodigoEncargado() if self.dato else None
 
     def getNombreProyecto(self):
-        return self.data.getNombreProyecto() if self.data else None
+        return self.dato.getNombreProyecto() if self.dato else None
+    
+    
+    def getEstado(self):
+        return self.dato.getEstado() if self.dato else None

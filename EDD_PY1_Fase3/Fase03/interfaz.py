@@ -17,8 +17,7 @@ from Estructuras.grafo import *
 tablaGlobal = TablaHash()
 proyectosReporte = Arbol_AVL()
 tareasReporte = ArbolB()
-listaProyectos = EnlazadaSimple()
-listaTareas = EnlazadaSimple()
+lista = EnlazadaSimple()
 grafoGeneral = Grafo()
 
 
@@ -283,7 +282,7 @@ class App():
                         empleado_tarea = tarea.get("empleado", "")
                         id_tarea = "T" + str(contador) + "-" + id_proyecto
 
-                        tarea_ = Tarea(id_tarea, nombre_tarea, empleado_tarea,nombre_proyecto)
+                        tarea_ = Tarea(id_tarea, nombre_tarea, empleado_tarea,nombre_proyecto,2)
                         tareasReporte.insertar(tarea_)  # Agregar tarea al árbol B
                         #listaTareas.Insertar(tarea_) #lista simple dentro del objeto Proyecto 
 
@@ -337,42 +336,63 @@ class App():
 
         #boton para regresar
         return_button = ctk.CTkButton(new_w, text="Regresar al Login", command=cerrarSesion)
-        return_button.place(x=625, y=520)  # Adjust the button position as needed
+        return_button.place(x=625, y=520)  
 
+        tmp = []
 
-        # Crear un ttk.Combobox para el nombre del proyecto obtenido de la función buscar
-        combobox = ttk.Combobox(new_w)
-        
-        # Obtener el nodo del usuario usando la función buscar
-        nodo_usuario = listaProyectos.buscar(self.username)
-        #print(nodo_usuario)
-        listaProyectos.recorrer()
-        if nodo_usuario is not None:
-            nombre_proyecto = nodo_usuario.idProyecto
-            combobox.set(nombre_proyecto)
-        
-        combobox.place(x=80, y=100)  # Ajusta las coordenadas 
+        listaArbolB = tareasReporte.recorrer()
+            
+        for tarea in listaArbolB:
+            tarea_nueva = Tarea(tarea.getIdTarea(), tarea.getNombreTarea(), tarea.getCodigoEncargado(), tarea.getNombreProyecto(), 2)
+            lista.insertar_inicio(tarea_nueva)
+            
+        aux = lista.primero
+        while aux != None:
+            if aux.getCodigoEncargado() == self.username:
+                tmp.append(aux.getIdTarea())
+                #rint(tmp)
+            aux = aux.siguiente
+        #print(tmp) 
 
         # Crear un LabelFrame para contener la tabla
         tabla_container = tk.LabelFrame(new_w)
         tabla_container.place(x=80, y=150, width=900)  # Ajusta las coordenadas 
 
-        columns = ("Columna1", "Columna2", "Columna3")
+        columns = ("Columna1", "Columna2", "Columna3","Columna4")
         # Crea el Treeview dentro de un LabelFrame
         table_height = 20
         tabla = ttk.Treeview(tabla_container, columns=columns, show="headings", height=table_height)
         tabla.heading("#1", text="Codigo Tarea")
         tabla.heading("#2", text="Nombre Proyecto")
         tabla.heading("#3", text="Nombre Tarea")
+        tabla.heading("#4", text="Estado")
+        tabla.pack(fill=tk.BOTH, expand=True, pady=20)  # Muestra la tabla
 
-        # Recorrer la lista de tareas y agregar las filas a la tabla
-        for tarea in listaTareas:
-            if tarea.codigoEmpleado == self.username:  
-                tabla.insert("", "end", values=(tarea.idTarea, tarea.nombreProyecto, tarea.nombreTarea))
+        def actualizar_tabla(event=None):
+            tabla.delete(*tabla.get_children())  # Limpia la tabla antes de actualizar
 
+            opcionesCombo = combo.get()
 
-        # Colocar la tabla en el LabelFrame
-        tabla.pack(fill=tk.BOTH, expand=True, pady=20)
+            if opcionesCombo == "Sin filtrar":
+                aux = lista.primero
+                while aux != None:
+                    if aux.getCodigoEncargado() == self.username:
+                        tabla.insert("", "end", values=(aux.getIdTarea(),aux.getNombreProyecto() , aux.getNombreTarea(), aux.getEstado()))
+                    aux = aux.siguiente
+            else:
+                aux = lista.primero
+                while aux != None:
+                    if aux.getCodigoEncargado() == self.username and aux.getIdTarea() == opcionesCombo:
+                        tabla.insert("", "end", values=(aux.getIdTarea(),aux.getNombreProyecto() , aux.getNombreTarea(), aux.getEstado()))
+                    aux = aux.siguiente 
+
+        combo = ttk.Combobox(new_w, values=["Sin filtrar"] + tmp)
+        combo.place(x=80, y=100)
+        combo.set("")
+        combo.bind("<<ComboboxSelected>>", actualizar_tabla)
+        
+        # Llama a la función para cargar la tabla inicialmente
+        actualizar_tabla()
 
         # Iniciar el bucle de la nueva ventana
         new_w.mainloop()
